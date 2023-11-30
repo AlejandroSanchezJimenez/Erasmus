@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			{% block title %}Erasmus ++
+			{% endblock %}
+		</title>
+		<link rel="icon" href="{{asset('assets/img/icon.ico')}}">
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{asset('assets/css/home.css')}}">
+		{% endblock %}
+
+		{% block javascripts %}{% endblock %}
+	</head>
+	<body>
+		{% block body %}
+			{% block header %}
+				<div class="barrasup">
+					<button class="btn-menu"></button>
+					<button class="btn-home"></button>
+					<p class="grande">Erasmus+ y Cuerpo Europeo de Solidaridad</p>
+					<button class="btn-login"></button>
+				</div>
+			{% endblock %}
+			{% block menu %}
+				<div class="contenedor">
+					<div class="menu">
+						<button class="home" title="Home"></button>
+						<button class="proyectos" title="Proyectos"></button>
+						<button class="convocatorias" title="Convocatorias"></button>
+					</div>
+					{% block separador %}
+						<div class="barra-vertical"></div>
+					{% endblock %}
+			{% endblock %}
+		{% endblock %}
+	</body>
+</html>

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% block header%} {{parent()}} {% endblock %}
+    {% block menu %} {{parent()}} {% endblock %}
+    {% block separador %} {{parent()}} {% endblock %}
+    <div class="contenido">Hola
+    </div>
+{% endblock %}

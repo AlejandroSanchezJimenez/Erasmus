@@ -1,0 +1,207 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.barrasup {
+    height: 5%;
+    background-color: #0072C6;
+    display: flex;
+    justify-content: space-between;
+    /* Distribuir elementos en el espacio disponible */
+    align-items: center;
+    /* Alinear verticalmente en el centro */
+    padding: 1%;
+}
+
+.btn-menu {
+    margin: 1%;
+    display: inline-block;
+    padding: 20px 20px;
+    /* Ajusta el padding según tus necesidades */
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #0072C6;
+    /* Color de fondo del botón */
+    color: #ffffff;
+    /* Color del texto del botón */
+    border: none;
+    /* Elimina el borde del botón */
+    border-radius: 5px;
+    /* Añade esquinas redondeadas si lo deseas */
+    background-image: url('../img/menu.png');
+    /* Ruta de la imagen */
+    background-size: cover;
+    /* Ajusta el tamaño de la imagen */
+}
+
+/* Cambia el estilo al pasar el ratón sobre el botón (opcional) */
+.btn-menu:hover {
+    background-color: #005183;
+    /* Cambia el color de fondo al pasar el ratón */
+}
+
+.btn-home {
+    margin: 1%;
+    display: inline-block;
+    padding: 20px 30px;
+    /* Ajusta el padding según tus necesidades */
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #0072C6;
+    /* Color de fondo del botón */
+    color: #ffffff;
+    /* Color del texto del botón */
+    border: none;
+    /* Elimina el borde del botón */
+    border-radius: 5px;
+    /* Añade esquinas redondeadas si lo deseas */
+    background-image: url('../img/logo.png');
+    /* Ruta de la imagen */
+    background-size: cover;
+    /* Ajusta el tamaño de la imagen */
+}
+
+.btn-login {
+    margin: 1%;
+    display: inline-block;
+    padding: 20px 20px;
+    /* Ajusta el padding según tus necesidades */
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #0072C6;
+    /* Color de fondo del botón */
+    color: #ffffff;
+    /* Color del texto del botón */
+    border: none;
+    /* Elimina el borde del botón */
+    border-radius: 5px;
+    /* Añade esquinas redondeadas si lo deseas */
+    background-image: url('../img/login.png');
+    /* Ruta de la imagen */
+    background-size: cover;
+    /* Ajusta el tamaño de la imagen */
+}
+
+.btn-login:hover {
+    background-color: #005183;
+    /* Cambia el color de fondo al pasar el ratón */
+}
+
+.grande {
+    font-weight: bold;
+    font-size: 150%;
+    margin-right: auto;
+    display: inline-block;
+}
+
+.contenedor {
+    display: flex;
+    flex: 1;
+    /* Establecer altura mínima del contenedor al 100% de la altura de la ventana */
+}
+
+.menu {
+    width: 80px;
+    background-color: #fff;
+    /* Fondo blanco */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home {
+    color: #0072C6;
+    /* Color del texto del ícono */
+    font-size: 24px;
+    margin-bottom: 5%;
+    cursor: pointer;
+    background-image: url('../img/home.png');
+    background-size: cover;
+    background-color: #fff;
+    margin: 20%;
+    display: inline-block;
+    padding: 20px 20px;
+    /* Ajusta el padding según tus necesidades */
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    /* Color de fondo del botón */
+    color: #ffffff;
+    /* Color del texto del botón */
+    border: none;
+    /* Elimina el borde del botón */
+    border-radius: 5px;
+    border-bottom: 2px solid black; 
+}
+
+.proyectos {
+    color: #0072C6;
+    /* Color del texto del ícono */
+    font-size: 24px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    background-image: url('../img/proyecto.png');
+    background-size: cover;
+    background-color: #fff;
+    margin: 20%;
+    display: inline-block;
+    padding: 20px 18px;
+    /* Ajusta el padding según tus necesidades */
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    /* Color de fondo del botón */
+    color: #ffffff;
+    /* Color del texto del botón */
+    border: none;
+    /* Elimina el borde del botón */
+    border-radius: 5px;
+    border-bottom: 2px solid black; /* Color del borde */
+}
+
+.convocatorias {
+    color: #0072C6;
+    /* Color del texto del ícono */
+    font-size: 24px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    background-image: url('../img/convocatoria.png');
+    background-size: cover;
+    background-color: #fff;
+    margin: 20%;
+    display: inline-block;
+    padding: 20px 20px;
+    /* Ajusta el padding según tus necesidades */
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    /* Color de fondo del botón */
+    color: #ffffff;
+    /* Color del texto del botón */
+    border: none;
+    /* Elimina el borde del botón */
+    border-radius: 5px;
+    border-bottom: 2px solid black; /* Color del borde */
+}
+
+.home:hover, .proyectos:hover, .convocatorias:hover {
+    background-color: #e0e0e0;
+    /* Cambia el color de fondo al pasar el ratón */
+}
+
+.barra-vertical {
+    width: 1%;
+    background-color: #D9D9D9; /* Color de la barra vertical */
+  }
+
+  .contenido {
+    flex: 1;
+    /* Ocupa el espacio restante del contenedor */
+    padding: 20px; /* O ajusta el relleno según tus necesidades */
+}
