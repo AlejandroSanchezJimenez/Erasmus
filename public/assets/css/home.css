@@ -1,8 +1,11 @@
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     display: flex;
     flex-direction: column;
+    background-color: #f5f5f5;
+    font-size: 1.5vw;
 }
 
 .barrasup {
@@ -88,7 +91,34 @@ html, body {
     /* Ajusta el tamaño de la imagen */
 }
 
-.btn-login:hover {
+.welcome {
+    margin-right: 2%;
+}
+
+.btn-logout {
+    margin: 1%;
+    display: inline-block;
+    padding: 20px 20px;
+    /* Ajusta el padding según tus necesidades */
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: #0072C6;
+    /* Color de fondo del botón */
+    color: #ffffff;
+    /* Color del texto del botón */
+    border: none;
+    /* Elimina el borde del botón */
+    border-radius: 5px;
+    /* Añade esquinas redondeadas si lo deseas */
+    background-image: url('../img/logout.png');
+    /* Ruta de la imagen */
+    background-size: cover;
+    /* Ajusta el tamaño de la imagen */
+}
+
+.btn-login:hover,
+.btn-logout:hover {
     background-color: #005183;
     /* Cambia el color de fondo al pasar el ratón */
 }
@@ -98,6 +128,18 @@ html, body {
     font-size: 150%;
     margin-right: auto;
     display: inline-block;
+    color: white;
+}
+
+.tit {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-right: auto;
+    display: inline-block;
+}
+
+.media {
+    font-size: 120%;
 }
 
 .contenedor {
@@ -108,7 +150,7 @@ html, body {
 
 .menu {
     width: 80px;
-    background-color: #fff;
+    background-color: #f5f5f5;
     /* Fondo blanco */
     display: flex;
     flex-direction: column;
@@ -123,7 +165,7 @@ html, body {
     cursor: pointer;
     background-image: url('../img/home.png');
     background-size: cover;
-    background-color: #fff;
+    background-color: #f5f5f5;
     margin: 20%;
     display: inline-block;
     padding: 20px 20px;
@@ -137,7 +179,7 @@ html, body {
     border: none;
     /* Elimina el borde del botón */
     border-radius: 5px;
-    border-bottom: 2px solid black; 
+    border-bottom: 2px solid black;
 }
 
 .proyectos {
@@ -148,7 +190,7 @@ html, body {
     cursor: pointer;
     background-image: url('../img/proyecto.png');
     background-size: cover;
-    background-color: #fff;
+    background-color: #f5f5f5;
     margin: 20%;
     display: inline-block;
     padding: 20px 18px;
@@ -162,7 +204,8 @@ html, body {
     border: none;
     /* Elimina el borde del botón */
     border-radius: 5px;
-    border-bottom: 2px solid black; /* Color del borde */
+    border-bottom: 2px solid black;
+    /* Color del borde */
 }
 
 .convocatorias {
@@ -173,7 +216,7 @@ html, body {
     cursor: pointer;
     background-image: url('../img/convocatoria.png');
     background-size: cover;
-    background-color: #fff;
+    background-color: #f5f5f5;
     margin: 20%;
     display: inline-block;
     padding: 20px 20px;
@@ -187,21 +230,518 @@ html, body {
     border: none;
     /* Elimina el borde del botón */
     border-radius: 5px;
-    border-bottom: 2px solid black; /* Color del borde */
+    border-bottom: 2px solid black;
+    /* Color del borde */
 }
 
-.home:hover, .proyectos:hover, .convocatorias:hover {
+.baremar {
+    /* Color del texto del ícono */
+    font-size: 24px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    background-image: url('../img/valorar.png');
+    background-size: cover;
+    background-color: #f5f5f5;
+    margin: 20%;
+    display: inline-block;
+    padding: 25px 20px;
+    /* Ajusta el padding según tus necesidades */
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    /* Color de fondo del botón */
+    color: #ffffff;
+    /* Color del texto del botón */
+    border: none;
+    /* Elimina el borde del botón */
+    border-radius: 5px;
+    border-bottom: 2px solid black;
+    /* Color del borde */
+}
+
+.home:hover,
+.proyectos:hover,
+.convocatorias:hover,
+.baremar:hover {
     background-color: #e0e0e0;
     /* Cambia el color de fondo al pasar el ratón */
 }
 
 .barra-vertical {
-    width: 1%;
-    background-color: #D9D9D9; /* Color de la barra vertical */
-  }
+    width: 0.5%;
+    background-color: #D9D9D9;
+    /* Color de la barra vertical */
+}
 
-  .contenido {
+.contenido {
     flex: 1;
     /* Ocupa el espacio restante del contenedor */
-    padding: 20px; /* O ajusta el relleno según tus necesidades */
+    padding-left: 5%;
+    /* O ajusta el relleno según tus necesidades */
+    padding-right: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+h2 {
+    color: #0072C6;
+}
+
+main {
+    margin-left: 5%;
+}
+
+.ecl-icon--xs {
+    height: 1rem;
+    width: 1rem;
+}
+
+a,
+a:not([href]):not([tabindex]) {
+    color: #004494;
+    cursor: pointer;
+}
+
+.convo-div {
+    background-color: #f5f5f5;
+    /* Blanco grisáceo */
+    color: #333;
+    /* Color de texto oscuro para contrastar */
+    font-family: Arial, sans-serif;
+    /* Tipo de fuente genérica */
+    display: flex;
+    /* Usa flexbox para alinear las cajas en línea */
+    flex-wrap: wrap;
+    /* Permite que las cajas pasen a la siguiente línea cuando no haya suficiente espacio */
+    justify-content: center;
+    /* Distribuye las cajas uniformemente en el contenedor */
+    padding: 20px;
+    /* Espaciado externo */
+}
+
+.convo-box {
+    width: 40%;
+    /* Ancho del 30% del contenedor padre */
+    background-color: #D9D9D9;
+    /* Fondo blanco para la caja */
+    padding: 20px;
+    /* Espaciado interno */
+    margin: 20px;
+    /* Margen externo */
+    border-radius: 5px;
+    /* Esquinas redondeadas */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Sombra ligera */
+    box-sizing: border-box;
+    /* Incluye el padding y el borde en el ancho total */
+    border-left: 4px solid black;
+}
+
+button {
+    float: right;
+    padding: 10px 20px;
+    /* Ajusta el padding según tus necesidades */
+    border: none;
+    border-radius: 5px;
+    /* Ajusta la cantidad de redondeo que deseas */
+    background-color: #0072C6;
+    /* Color de fondo del botón */
+    color: #ffffff;
+    /* Color del texto del botón */
+    cursor: pointer;
+}
+
+.newConvo {
+    border-radius: 5px;
+    width: 15em;
+}
+
+.boton-container {
+    text-align: center;
+}
+
+.enviar {
+    margin: 0;
+    padding: 10px 100px;
+    background-color: #0072C6;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+.expandInfo:hover,
+.enviar:hover,
+.verIdioma:hover,
+.newConvo:hover {
+    background-color: #005183;
+    /* Cambia el color de fondo al pasar el ratón */
+}
+
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    /* Ajusta el ancho del formulario según tus necesidades */
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 20px;
+    width: 30%;
+    /* Ajusta el ancho del contenedor según tus necesidades */
+}
+
+.label-inside {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-size: 12px;
+    color: #888;
+    pointer-events: none;
+    transition: top 0.3s, left 0.3s, font-size 0.3s;
+}
+
+.input-with-label {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-with-label:focus+.label-inside,
+.input-with-label:not(:placeholder-shown)+.label-inside {
+    top: -15px;
+    left: 5px;
+    font-size: 10px;
+    color: #0072C6;
+}
+
+.photo-container {
+    width: 3em;
+    height: 4em;
+    /* Ajusta el ancho del contenedor de la foto según tus necesidades */
+    position: relative;
+    float: right;
+    margin: 1.5%;
+}
+
+.photo {
+    width: 3em;
+    height: 4em;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos específicos para el input checkbox */
+.checkbox-input {
+    margin-right: 8px;
+    /* Ajusta el margen según tus necesidades */
+}
+
+/* Estilos para la apariencia del checkbox */
+.checkbox-custom {
+    position: relative;
+    cursor: pointer;
+    /* Cambia el cursor al pasar sobre el checkbox */
+    height: 16px;
+    /* Altura del checkbox */
+    width: 16px;
+    /* Ancho del checkbox */
+}
+
+/* Estilos para ocultar el input nativo */
+.checkbox-custom input {
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+/* Estilos para el marcador dentro del checkbox */
+.checkbox-custom::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #333;
+    /* Borde del checkbox */
+    border-radius: 3px;
+    /* Bordes redondeados del checkbox */
+    box-sizing: border-box;
+}
+
+/* Estilos para el marcador cuando el checkbox está marcado */
+.checkbox-custom input:checked+.checkbox-custom::before {
+    background-color: #333;
+    /* Color de fondo cuando está marcado */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    max-height: 300px;
+    /* Puedes ajustar este valor según tus necesidades */
+    overflow-y: auto;
+}
+
+section {
+    user-select: none;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+input[type="number"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+input[type="number"].baremaForm {
+    width: 40%;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+}
+
+table tr {
+    margin-bottom: 10px;
+    /* Agrega espacio entre filas */
+}
+
+.login-container {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    width: 30%;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 5%;
+}
+
+.register-container {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    width: 60%;
+}
+
+.login-container:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1), 0 16px 32px rgba(0, 0, 0, 0.1);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.form-group button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-group button :hover {
+    background-color: #005183;
+}
+
+.tab-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* Ajusta el ancho del contenedor según sea necesario */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    border-top: 0;
+}
+
+.tabs-wrapper {
+    display: flex;
+    background-color: #fff;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 10px 20px;
+    margin: 0;
+    border: solid 1px #ccc;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 5px 5px 0 0;
+    transition: background-color 0.3s ease;
+}
+
+button:disabled {
+    background-color: #888;
+}
+
+.tab-button:hover {
+    background-color: #005183;
+}
+
+button:disabled:hover {
+    background-color: #646464;
+    cursor: not-allowed;
+}
+
+.tab-button.active {
+    background-color: #005183;
+    border-bottom: 1px solid #005183;
+    cursor: default;
+    border: solid 1px #ccc;
+}
+
+.content {
+    padding: 20px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.invalido {
+    border: 1px solid red
+}
+
+.valido {
+    border: 1px solid green;
+}
+
+.form-control {
+    font-family: system-ui, sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.1;
+    display: grid;
+    grid-template-columns: 3em auto;
+    gap: 0.5em;
+    margin: 2%;
+    border-right: 4px inset black;
+    border-bottom:4px dashed gray;
+    padding: 1%;
+}
+
+.form-control--disabled {
+    color: var(--form-control-disabled);
+    cursor: not-allowed;
+}
+
+input[type="checkbox"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    /* Remove most all native input styles */
+    appearance: none;
+    /* For iOS < 15 */
+    background-color: var(--form-background);
+    /* Not removed via appearance */
+    margin: 0;
+
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+
+    display: grid;
+    place-content: center;
+}
+
+input[type="checkbox"].checkbox-custom.checkbox-input {
+    margin: 10px !important;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    transform: scale(0);
+    transform-origin: bottom left;
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+    /* Windows High Contrast Mode */
+    background-color: #0072C6;
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+input[type="checkbox"]:focus {
+    outline: max(2px, 0.15em) solid currentColor;
+    outline-offset: max(2px, 0.15em);
+}
+
+input[type="checkbox"]:disabled {
+    --form-control-color: var(--form-control-disabled);
+
+    color: var(--form-control-disabled);
+    cursor: not-allowed;
 }

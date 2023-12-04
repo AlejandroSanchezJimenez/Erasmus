@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% block header%}
+		{{parent()}}
+	{% endblock %}
+	{% block menu %}
+		{{parent()}}
+	{% endblock %}
+	{% block separador %}
+		{{parent()}}
+	{% endblock %}
+	{% block javascripts %}
+		{{parent()}}
+	{% endblock %}
+
+	<div class="contenido">
+    <center><div class="register-container">
+    <h1>Register</h1>
+
+    {{ form_errors(registrationForm) }}
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.DNI) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+
+        <button type="submit" class="btn">Register</button>
+    {{ form_end(registrationForm) }}
+    </div></center>
+    </div>
+{% endblock %}

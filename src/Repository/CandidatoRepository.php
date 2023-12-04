@@ -21,20 +21,20 @@ class CandidatoRepository extends ServiceEntityRepository
         parent::__construct($registry, Candidato::class);
     }
 
-//    /**
-//     * @return Candidato[] Returns an array of Candidato objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return Candidato[] Returns an array of Candidato objects
+    */
+   public function findByDNI($value): array
+   {
+       return $this->createQueryBuilder('c')
+           ->andWhere('c.DNI = :val')
+           ->setParameter('val', $value)
+           ->orderBy('c.id', 'ASC')
+           ->setMaxResults(10)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 
 //    public function findOneBySomeField($value): ?Candidato
 //    {

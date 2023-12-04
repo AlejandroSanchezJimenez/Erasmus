@@ -9,30 +9,46 @@
 		{% block stylesheets %}
 			<link rel="stylesheet" href="{{asset('assets/css/home.css')}}">
 		{% endblock %}
-
-		{% block javascripts %}{% endblock %}
 	</head>
 	<body>
 		{% block body %}
+			{% block javascripts %}
+				<script src="{{asset('assets/js/redireccion.js')}}"></script>
+				<script src="{{asset('assets/js/expandMenu.js')}}"></script>
+				<script src="{{asset('assets/js/seePDF.js')}}"></script>
+				<script src="{{asset('assets/js/mostrarOcultar.js')}}"></script>
+				<script src="{{asset('assets/js/validaciones.js')}}"></script>
+			{% endblock %}
 			{% block header %}
 				<div class="barrasup">
 					<button class="btn-menu"></button>
-					<button class="btn-home"></button>
+					<button class="btn-home" id="logo"></button>
 					<p class="grande">Erasmus+ y Cuerpo Europeo de Solidaridad</p>
-					<button class="btn-login"></button>
+					{% if app.user %}
+						<p class="welcome">Bienvenido <br><strong>{{ app.user.userIdentifier }}</strong></p>
+						<a href="{{ path('app_logout') }}">
+							<button class="btn-logout" id="btn-logout" title="Logout"></button>
+						</a>
+					{% else %}
+						<a href="{{ path('app_login') }}">
+							<button class="btn-login" id="btn-login" title="Login"></button>
+						</a>
+					{% endif %}
 				</div>
 			{% endblock %}
 			{% block menu %}
 				<div class="contenedor">
 					<div class="menu">
-						<button class="home" title="Home"></button>
-						<button class="proyectos" title="Proyectos"></button>
-						<button class="convocatorias" title="Convocatorias"></button>
+						<button class="home" id="home" title="Home"></button>
+						<button class="proyectos" id="proyectos" title="Proyectos"></button>
+						<button class="convocatorias" id="convocatorias" title="Convocatorias"></button>
+						<button class="baremar" id="baremar" title="Baremar"></button>
 					</div>
 					{% block separador %}
 						<div class="barra-vertical"></div>
 					{% endblock %}
+				{% endblock %}
 			{% endblock %}
-		{% endblock %}
+		</body>
 	</body>
 </html>

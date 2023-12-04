@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% block header%}
+		{{parent()}}
+	{% endblock %}
+	{% block menu %}
+		{{parent()}}
+	{% endblock %}
+	{% block separador %}
+		{{parent()}}
+	{% endblock %}
+	{% block javascripts %}
+		{{parent()}}
+	{% endblock %}
+
+	<div class="contenido">
+		<p class="tit">Baremar candidatos</p>
+		<input type="text" id="searcher" class="searcher" placeholder="Buscar por DNI">
+		<table>
+			<thead>
+				<tr>
+					<th>DNI</th>
+					<th>Nota</th>
+					<th>Idioma</th>
+					<th>Idoneidad</th>
+					<th>Entrevista</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for i in 1..5 %}
+					<tr>
+						<td>77371286E</td>
+						<td>
+							<div class="form-container">
+								<input type="number" min="0" max="10" step="0.1" class="baremaForm" placeholder="Nota">
+								<button class="verNota">Ver PDF</button>
+							</div>
+						</td>
+						<td><div class="form-container">
+								<input type="number" min="0" max="10" step="0.1" class="baremaForm" placeholder="Idioma">
+								<button class="verIdioma">Ver PDF</button>
+							</div>
+						</td>
+						<td><input type="number" min="0" max="10" step="0.1" placeholder="Idoneidad"></td>
+						<td><input type="number" min="0" max="10" step="0.1" placeholder="Entrevista"></td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+	</div>
+{% endblock %}

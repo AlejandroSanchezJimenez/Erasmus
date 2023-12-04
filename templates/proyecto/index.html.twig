@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% block header%}
+		{{parent()}}
+	{% endblock %}
+	{% block menu %}
+		{{parent()}}
+	{% endblock %}
+	{% block separador %}
+		{{parent()}}
+	{% endblock %}
+	{% block javascripts %}
+		{{parent()}}
+	{% endblock %}
+	<div class="contenido">
+		<h1>Proyectos abiertos <button class="newConvo" id="newConvo">Nuevo proyecto</button></h1>
+		<br><br>
+		<main>
+			<section>
+				<p class="media">
+					¡Bienvenido/a a la emocionante página de proyectos Erasmus! Aquí, cada proyecto es una oportunidad única para el crecimiento personal y la colaboración internacional. Explorarás un mundo de posibilidades educativas y culturales a través de distintas convocatorias, cada una ofreciendo una experiencia enriquecedora.<br><br>
+
+Sumérgete en la diversidad de oportunidades que estos proyectos tienen para ofrecer. Desde intercambios culturales hasta programas de aprendizaje innovadores, cada convocatoria es una puerta abierta hacia nuevas amistades, habilidades y perspectivas. ¡Prepárate para embarcarte en un viaje que transformará tu vida y enriquecerá tu bagaje académico!<br><br>
+
+En esta página, descubrirás cómo cada proyecto Erasmus es una pieza única en el rompecabezas de la educación global. ¡Que este nuevo año te traiga experiencias inolvidables y aprendizajes significativos en tu viaje con Erasmus! ¡Buena suerte y disfruta del viaje! 🚀
+				</p>
+			</section><br>
+        
+        <div class="convo-div">
+            {% for i in 1..5 %}
+			<div class="convo-box">
+				<h3>Proyecto Erasmus para consorcios de movilidad de Educación Superior (KA130-HED)</h3>
+                <hr>
+                <p>Fecha de inicio: <strong>{{ "now"|date("d/m/Y H:i:s") }} (Hora española)</strong></p>
+                <p>Fecha de fin: <strong>{{ "now"|date("d/m/Y H:i:s") }} (Hora española)</strong></p>
+                <br><br>
+                <button class="expandInfo" id="expandInfo">Ver convocatorias</button>
+			</div>
+            {% endfor %}
+        </div>
+		</main>
+
+	</div>
+{% endblock %}
+

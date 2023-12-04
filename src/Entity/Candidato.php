@@ -7,9 +7,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: CandidatoRepository::class)]
-class Candidato
+#[UniqueEntity(fields: ['DNI'], message: 'There is already an account with this DNI')]
+class Candidato implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -49,6 +53,12 @@ class Candidato
     #[ORM\OneToMany(mappedBy: 'Candidato', targetEntity: Baremacion::class, orphanRemoval: true)]
     private Collection $baremacions;
 
+    #[ORM\Column(length: 100)]
+    private ?string $Password = null;
+
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private ?array $Roles = null;
+
     public function __construct()
     {
         $this->solicituds = new ArrayCollection();
@@ -70,6 +80,16 @@ class Candidato
         $this->DNI = $DNI;
 
         return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->DNI;
     }
 
     public function getFechaNac(): ?\DateTimeInterface
@@ -226,5 +246,48 @@ class Candidato
         }
 
         return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->Password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->Password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->Roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): static
+    {
+        $this->Roles = $roles;
+
+        return $this;
+    }
+
+     /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }

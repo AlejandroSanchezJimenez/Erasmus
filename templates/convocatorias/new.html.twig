@@ -1,0 +1,277 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% block header%}
+		{{parent()}}
+	{% endblock %}
+	{% block menu %}
+		{{parent()}}
+	{% endblock %}
+	{% block separador %}
+		{{parent()}}
+	{% endblock %}
+
+	<div class="contenido">
+		<form>
+			<div class="tab-container">
+				<div class="tabs-wrapper">
+					<button class="tab-button active" id="1">Básicos</button>
+					<button class="tab-button" id="2" disabled>Destinatarios</button>
+					<button class="tab-button" id="3" disabled>Baremos</button>
+					<button class="tab-button" id="4" disabled>Idiomas</button>
+				</div>
+				<!-- Agregamos el contenido aquí -->
+				<div
+					id="content" class="content">
+					<!-- Contenido de la pestaña activa -->
+					<div class="tab-content active" id="content1">
+						<section class="secConvocatoria">
+							<h2 id="datConvo">Datos convocatoria</h2>
+							<div>
+								<div class="form-container">
+
+									<div class="input-container">
+										<input type="text" id="nombre" class="input-with-label sec1" placeholder=" " data-valida="nombre">
+										<label for="nombre" class="label-inside">Nombre</label>
+									</div>
+
+									<div class="input-container">
+										<input type="number" id="movilidades" class="input-with-label sec1" placeholder=" " data-valida="int">
+										<label for="movilidades" class="label-inside">Movilidades</label>
+									</div>
+
+									<div class="input-container">
+										<select id="tipo" class="input-with-label sec1" data-valida="select">
+											<option value="">Sin seleccionar</option>
+											<option value="corto">Corto</option>
+											<option value="largo">Largo</option>
+										</select>
+										<label for="tipo" class="label-inside">Tipo</label>
+									</div>
+
+									<div class="input-container">
+										<input type="number" id="tiempo" class="input-with-label sec1" placeholder=" " data-valida="int">
+										<label for="tiempo" class="label-inside">Tiempo en días</label>
+									</div>
+
+									<div class="input-container">
+										<input type="date" id="fechaInicio" class="input-with-label sec1" placeholder=" " data-valida="fecha">
+										<label for="fechaInicio" class="label-inside">Fecha de inicio</label>
+									</div>
+
+									<div class="input-container">
+										<input type="date" id="fechaFin" class="input-with-label sec1" placeholder=" " data-valida="fecha">
+										<label for="fechaFin" class="label-inside">Fecha de fin</label>
+									</div>
+
+									<div class="input-container">
+										<input type="date" id="fechaPruebasInicio" class="input-with-label sec1" placeholder=" " data-valida="fecha">
+										<label for="fechaPruebasInicio" class="label-inside">Fecha de inicio de pruebas</label>
+									</div>
+
+									<div class="input-container">
+										<input type="date" id="fechaPruebasFin" class="input-with-label sec1" placeholder=" " data-valida="fecha">
+										<label for="fechaPruebasFin" class="label-inside">Fecha de fin de pruebas</label>
+									</div>
+
+									<div class="input-container">
+										<input type="date" id="fechaListadoProvisional" class="input-with-label sec1" placeholder=" " data-valida="fecha">
+										<label for="fechaListadoProvisional" class="label-inside">Fecha de listado provisional</label>
+									</div>
+
+									<div class="input-container">
+										<input type="date" id="fechaListadoOficial" class="input-with-label sec1" placeholder=" " data-valida="fecha">
+										<label for="fechaListadoOficial" class="label-inside">Fecha de listado oficial</label>
+									</div>
+									<!-- Agrega aquí los enlaces a las oportunidades -->
+								</div>
+							</section><br>
+							{# <div class="form-container">
+																					<div class="boton-container"> #}
+							<button class="enviar" disabled>Enviar formulario</button>
+							{# </div>
+																				</div> #}
+						</div>
+						<!-- Contenido de otras pestañas (inicialmente oculto) -->
+						<div class="tab-content" id="content2">
+							<section>
+								<h2 id="datDes">Datos destinatarios</h2>
+								<div id="secDestinatario">
+									<div
+										class="form-container" id="des-container">{# {% for i in 1..5 %}
+																						<div class="checkbox-container">
+																							<label class="form-control">
+																								<input type="checkbox" name="checkbox-checked"/>
+																								Checkbox - checked
+																							</label>
+																						</div>
+																					{% endfor %} #}
+									</div>
+								</div>
+							</section><br>
+							<button class="enviar" disabled>Enviar formulario</button>
+						</div>
+						<div class="tab-content" id="content3">
+							<section>
+								<h2 id="datBar">Datos baremos</h2>
+								<div id="secBaremos">
+									<table>
+										<thead>
+											<tr>
+												<th>Item</th>
+												<th>Máximo</th>
+												<th>Requisito</th>
+												<th>Mínimo</th>
+												<th>Aporta Alumno</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<div class="checkbox-container">
+														<input type="checkbox" class="checkbox-custom checkbox-input sec3" id="chkNota" data-valida="chkbox">
+														<label for="miCheckbox" class="checkmark"></label>
+														<span>Nota</span>
+													</div>
+												</td>
+												<td><input type="number" placeholder="Máximo de Nota" data-valida="double" disabled></td>
+												<td>
+													<select disabled data-valida="select">
+														<option value="">Sin seleccionar</option>
+														<option value="si">Sí</option>
+														<option value="no">No</option>
+													</select>
+												</td>
+												<td><input type="number" placeholder="Mínimo de Nota" data-valida="double" disabled></td>
+												<td>
+													<select disabled data-valida="select">
+														<option value="">Sin seleccionar</option>
+														<option value="si">Sí</option>
+														<option value="no">No</option>
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="checkbox-container">
+														<input type="checkbox" class="checkbox-custom checkbox-input sec3" id="chkIdioma" data-valida="chkbox">
+														<label for="chkIdioma" class="checkmark"></label>
+														<span>Idioma</span>
+													</div>
+												</td>
+												<td><input type="number" placeholder="Máximo de Nota" data-valida="double" disabled></td>
+												<td>
+													<select disabled data-valida="select">
+														<option value="">Sin seleccionar</option>
+														<option value="si">Sí</option>
+														<option value="no">No</option>
+													</select>
+												</td>
+												<td><input type="number" placeholder="Mínimo de Nota" data-valida="double" disabled></td>
+												<td>
+													<select disabled data-valida="select">
+														<option value="">Sin seleccionar</option>
+														<option value="si">Sí</option>
+														<option value="no">No</option>
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="checkbox-container">
+														<input type="checkbox" class="checkbox-custom checkbox-input sec3" id="chkIdoneidad" data-valida="chkbox">
+														<label for="miCheckbox" class="checkmark"></label>
+														<span>Idoneidad</span>
+													</div>
+												</td>
+												<td><input type="number" placeholder="Máximo de Nota" data-valida="double" disabled></td>
+												<td>
+													<select disabled data-valida="select">
+														<option value="">Sin seleccionar</option>
+														<option value="si">Sí</option>
+														<option value="no">No</option>
+													</select>
+												</td>
+												<td><input type="number" placeholder="Mínimo de Nota" data-valida="double" disabled></td>
+												<td>
+													<select disabled data-valida="select">
+														<option value="">Sin seleccionar</option>
+														<option value="si">Sí</option>
+														<option value="no">No</option>
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<div class="checkbox-container">
+														<input type="checkbox" class="checkbox-custom checkbox-input sec3" id="chkEntrevista" data-valida="chkbox">
+														<label for="miCheckbox" class="checkmark"></label>
+														<span>Entrevista</span>
+													</div>
+												</td>
+												<td><input type="number" placeholder="Máximo de Nota" data-valida="double" disabled></td>
+												<td>
+													<select disabled data-valida="select">
+														<option value="">Sin seleccionar</option>
+														<option value="si">Sí</option>
+														<option value="no">No</option>
+													</select>
+												</td>
+												<td><input type="number" placeholder="Mínimo de Nota" data-valida="double" disabled></td>
+												<td>
+													<select disabled data-valida="select">
+														<option value="">Sin seleccionar</option>
+														<option value="si">Sí</option>
+														<option value="no">No</option>
+													</select>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</section><br>
+							<button class="enviar" disabled>Enviar formulario</button>
+						</div>
+
+						<div class="tab-content" id="content4">
+							<section class="secIdiomas">
+								<h2>Puntuación idiomas</h2>
+								<div id="secIdiomas">
+									<table>
+										<thead>
+											<tr>
+												<th>A1</th>
+												<th>A2</th>
+												<th>B1</th>
+												<th>B2</th>
+												<th>C1</th>
+												<th>C2</th>
+												<!-- Agregar más columnas según sea necesario -->
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><input type="number" step="0.1" placeholder="A1" data-valida="double" class="sec4"></td>
+												<td><input type="number" step="0.1" placeholder="A2" data-valida="double" class="sec4"></td>
+												<td><input type="number" step="0.1" placeholder="B1" data-valida="double" class="sec4"></td>
+												<td><input type="number" step="0.1" placeholder="B2" data-valida="double" class="sec4"></td>
+												<td><input type="number" step="0.1" placeholder="C1" data-valida="double" class="sec4"></td>
+												<td><input type="number" step="0.1" placeholder="C2" data-valida="double" class="sec4"></td>
+											</tr>
+											<!-- Puedes agregar más filas según sea necesario -->
+										</tbody>
+									</table>
+								</div>
+							</section><br>
+							<button class="enviar" disabled>Enviar formulario</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</form>
+	</div>
+	{% block javascripts %}
+		{{parent()}}
+	{% endblock %}
+{% endblock %}

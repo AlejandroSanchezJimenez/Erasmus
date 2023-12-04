@@ -1,9 +1,91 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	{% block header%} {{parent()}} {% endblock %}
-    {% block menu %} {{parent()}} {% endblock %}
-    {% block separador %} {{parent()}} {% endblock %}
-    <div class="contenido">Hola
-    </div>
+	{% block header%}
+		{{parent()}}
+	{% endblock %}
+	{% block menu %}
+		{{parent()}}
+	{% endblock %}
+	{% block separador %}
+		{{parent()}}
+	{% endblock %}
+    {% block javascripts %}
+        {{parent()}}
+    {% endblock %}
+	<div class="contenido">
+		<h1>¡Bienvenidos a la página de Erasmus+ y del Cuerpo Europeo 
+										de Solidaridad!</h1>
+		<br><br>
+		<main>
+			<p>
+				Aquí puedes solicitar una o más de las acciones apoyadas por el Programa Erasmus+ o el Cuerpo Europeo de Solidaridad y gestionadas por las Agencias Nacionales Erasmus+.
+				<br><br>
+				En la sección "Oportunidades" a continuación, puede explorar las convocatorias abiertas del programa y postularse. Tenga en cuenta que para iniciar su solicitud deberá registrarse o iniciar sesión con sus credenciales de inicio de sesión de la UE. Consulta nuestras guías de solicitantes y beneficiariosSe abre en una ventana nuevapara obtener pautas completas paso a paso.
+			</p><br>
+
+			<section>
+				<h2>Más información</h2>
+				<hr>
+				<p>
+					Si necesita más información sobre el programa Erasmus+, visite la
+					<a href="/">página de inicio del programa</a>.
+																								                Si buscas información sobre el Cuerpo Europeo de Solidaridad, visita el
+					<a href="https://youth.europa.eu/solidarity">Portal Europeo de la Juventud
+                    <svg title="Link icon" focusable="false" aria-hidden="false" class="ecl-link__icon ecl-icon ecl-icon--xs" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="ui--external"><path d="M1 1l8.25.046v2.71H3.796V20.29H20.25v-5.465H23V23H1V1zm11.468 0H23v10.494l-3.944-3.93-5.892 5.87-2.599-2.588 5.847-5.824L12.468 1z"></path></svg>
+                    </a>.
+				</p>
+			</section><br>
+
+			<section>
+				<h2>Agencia Ejecutiva en el ámbito Educativo, Audiovisual y Cultural</h2>
+				<hr>
+				<p>
+					Si estás interesado en solicitar acciones Erasmus+ gestionadas por la Agencia Ejecutiva en el ámbito Educativo, Audiovisual y Cultural, visita la
+					<a href="https://www.eacea.ec.europa.eu/select-language?destination=/node/1">página web de la Agencia
+                    <svg title="Link icon" focusable="false" aria-hidden="false" class="ecl-link__icon ecl-icon ecl-icon--xs" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="ui--external"><path d="M1 1l8.25.046v2.71H3.796V20.29H20.25v-5.465H23V23H1V1zm11.468 0H23v10.494l-3.944-3.93-5.892 5.87-2.599-2.588 5.847-5.824L12.468 1z"></path></svg>
+                    </a>.
+				</p>
+			</section><br>
+
+			<section>
+				<h2>¿Busca ayuda o tiene más preguntas?</h2>
+				<p>
+					¿Tienes más preguntas sobre el programa Erasmus+? Ponte en contacto con una Agencia Nacional en tu país.
+																				                Por favor revisa la
+					<a href="https://erasmus-plus.ec.europa.eu/contacts">lista de contactos
+                    <svg title="Link icon" focusable="false" aria-hidden="false" class="ecl-link__icon ecl-icon ecl-icon--xs" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="ui--external"><path d="M1 1l8.25.046v2.71H3.796V20.29H20.25v-5.465H23V23H1V1zm11.468 0H23v10.494l-3.944-3.93-5.892 5.87-2.599-2.588 5.847-5.824L12.468 1z"></path></svg>
+                    </a>
+					en el menú Soporte.
+				</p>
+				<p>
+					¿Necesita ayuda para solicitar el Cuerpo Europeo de Solidaridad?
+										Por favor, visite la página
+					<a href="/support">"Contáctenos"
+                    <svg title="Link icon" focusable="false" aria-hidden="false" class="ecl-link__icon ecl-icon ecl-icon--xs" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="ui--external"><path d="M1 1l8.25.046v2.71H3.796V20.29H20.25v-5.465H23V23H1V1zm11.468 0H23v10.494l-3.944-3.93-5.892 5.87-2.599-2.588 5.847-5.824L12.468 1z"></path></svg>
+                    </a>
+					en el Portal Europeo de la Juventud.
+				</p>
+			</section><br>
+
+			<section>
+				<h2>PROYECTOS</h2>
+				<p>Consulte una lista de proyectos para Erasmus+ y el Cuerpo Europeo de Solidaridad en el
+					<a href="/proyectos">enlace siguiente.
+                    <svg title="Link icon" focusable="false" aria-hidden="false" class="ecl-link__icon ecl-icon ecl-icon--xs" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="ui--external"><path d="M1 1l8.25.046v2.71H3.796V20.29H20.25v-5.465H23V23H1V1zm11.468 0H23v10.494l-3.944-3.93-5.892 5.87-2.599-2.588 5.847-5.824L12.468 1z"></path></svg>
+                    </a>
+				</p>
+				<!-- Agrega aquí los enlaces a las oportunidades -->
+			</section><br>
+
+			<section>
+				<h2>OPORTUNIDADES</h2>
+				<p>Consulte una lista de oportunidades para Erasmus+ y el Cuerpo Europeo de Solidaridad en el
+					<a href="/convocatorias">enlace siguiente.<svg title="Link icon" focusable="false" aria-hidden="false" class="ecl-link__icon ecl-icon ecl-icon--xs" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="ui--external"><path d="M1 1l8.25.046v2.71H3.796V20.29H20.25v-5.465H23V23H1V1zm11.468 0H23v10.494l-3.944-3.93-5.892 5.87-2.599-2.588 5.847-5.824L12.468 1z"></path></svg>
+                    </a>
+				</p>
+				<!-- Agrega aquí los enlaces a las oportunidades -->
+			</section><br>
+		</main>
+	</div>
 {% endblock %}

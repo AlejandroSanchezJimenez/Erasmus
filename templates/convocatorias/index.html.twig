@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% block header%}
+		{{parent()}}
+	{% endblock %}
+	{% block menu %}
+		{{parent()}}
+	{% endblock %}
+	{% block separador %}
+		{{parent()}}
+	{% endblock %}
+	{% block javascripts %}
+		{{parent()}}
+	{% endblock %}
+	<div class="contenido">
+		<h1>Convocatorias abiertas <button class="newConvo" id="newConvo">Nueva convocatoria</button></h1>
+		<br><br>
+		<main>
+			<section>
+				<p class="media">
+					Bienvenido a la sección de las solicitudes Erasmus+. Desde aquí puede solicitar una o más acciones apoyadas por el programa Erasmus+ y gestionadas por las Agencias Nacionales Erasmus+. Abajo puede encontrar las solicitudes clasificadas según el ámbito de oportunidad o por acción clave.<br><br>
+					Si buscas información sobre el Cuerpo Europeo de Solidaridad, visita el
+															Antes de comenzar su solicitud, compruebe que su organización dispone de un único ID de la organización (OID), como requisito para participar en acciones de Erasmus+ gestionadas por las Agencias Nacionales. Puede buscar su ID de la organización (OID) o registrar una nueva organización usando la plataforma Erasmus+ y Cuerpo Europeo de Solidaridad
+				</p>
+			</section><br>
+        
+        <div class="convo-div">
+            {% for i in 1..5 %}
+			<div class="convo-box">
+				<h3>Acreditación Erasmus para consorcios de movilidad de Educación Superior (KA130-HED)</h3>
+                <hr>
+                <p>Número de modalidades: <strong>5</strong></p>
+                <p>Tipo de convocatoria: <strong>Corta (30 días)</strong></p>
+                <p>Fecha inicio: <strong>{{ "now"|date("d/m/Y") }}</strong></p>
+                <p>Fecha límite: <strong>{{ "now"|date("d/m/Y") }}</strong></p>
+                <p>Fecha inicio pruebas: <strong>{{ "now"|date("d/m/Y") }}</strong></p>
+                <p>Fecha límite pruebas: <strong>{{ "now"|date("d/m/Y") }}</strong></p>
+                <p>Fecha lista provisional: <strong>{{ "now"|date("d/m/Y") }}</strong></p>
+                <p>Fecha lista oficial: <strong>{{ "now"|date("d/m/Y") }}</strong></p>
+                <br><br>
+				{% if app.user %}
+						<a href="{{ path('app_formconvo') }}">
+							<button class="expandInfo" id="expandInfo">Solicitar</button>
+						</a>
+					{% else %}
+						<a href="{{ path('app_login') }}">
+							<button class="expandInfo" id="expandInfo">Solicitar</button>
+						</a>
+					{% endif %}
+			</div>
+            {% endfor %}
+        </div>
+		</main>
+
+	</div>
+{% endblock %}
