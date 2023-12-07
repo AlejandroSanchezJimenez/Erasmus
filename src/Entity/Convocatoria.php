@@ -56,12 +56,19 @@ class Convocatoria
     #[ORM\OneToMany(mappedBy: 'Convocatoria', targetEntity: Baremacion::class, orphanRemoval: true)]
     private Collection $baremacions;
 
+    #[ORM\Column(length: 100)]
+    private ?string $Nombre = null;
+
+    #[ORM\OneToMany(mappedBy: 'Convocatoria', targetEntity: ConvocatoriaDestinatario::class, orphanRemoval: true)]
+    private Collection $convocatoriaDestinatarios;
+
     public function __construct()
     {
         $this->convocatoriaBaremables = new ArrayCollection();
         $this->convocatoriaIdiomas = new ArrayCollection();
         $this->solicituds = new ArrayCollection();
         $this->baremacions = new ArrayCollection();
+        $this->convocatoriaDestinatarios = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -291,6 +298,48 @@ class Convocatoria
             // set the owning side to null (unless already changed)
             if ($baremacion->getConvocatoria() === $this) {
                 $baremacion->setConvocatoria(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getNombre(): ?string
+    {
+        return $this->Nombre;
+    }
+
+    public function setNombre(string $Nombre): static
+    {
+        $this->Nombre = $Nombre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ConvocatoriaDestinatario>
+     */
+    public function getConvocatoriaDestinatarios(): Collection
+    {
+        return $this->convocatoriaDestinatarios;
+    }
+
+    public function addConvocatoriaDestinatario(ConvocatoriaDestinatario $convocatoriaDestinatario): static
+    {
+        if (!$this->convocatoriaDestinatarios->contains($convocatoriaDestinatario)) {
+            $this->convocatoriaDestinatarios->add($convocatoriaDestinatario);
+            $convocatoriaDestinatario->setConvocatoria($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConvocatoriaDestinatario(ConvocatoriaDestinatario $convocatoriaDestinatario): static
+    {
+        if ($this->convocatoriaDestinatarios->removeElement($convocatoriaDestinatario)) {
+            // set the owning side to null (unless already changed)
+            if ($convocatoriaDestinatario->getConvocatoria() === $this) {
+                $convocatoriaDestinatario->setConvocatoria(null);
             }
         }
 

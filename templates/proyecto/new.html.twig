@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% block header%}
+		{{parent()}}
+	{% endblock %}
+	{% block menu %}
+		{{parent()}}
+	{% endblock %}
+	{% block separador %}
+		{{parent()}}
+	{% endblock %}
+
+	<div class="contenido">
+    <form>
+		<div class="tab-container">
+			<div class="tabs-wrapper">
+				<button class="tab-button" id="1">Básicos</button>
+			</div>
+			<div id="content" class="content">
+				<div class="tab-content active" id="content1">
+					<section class="secConvocatoria">
+						<h2 id="datConvo">Datos proyecto</h2>
+						<div>
+							<div class="form-container">
+
+								<div class="input-container">
+									<input type="text" id="codigo" class="input-with-label sec1" placeholder=" " data-valida="nombre">
+									<label for="codigo" class="label-inside">Codigo</label>
+								</div>
+
+								<div class="input-container">
+									<input type="text" id="nombre" class="input-with-label sec1" placeholder=" " data-valida="nombre">
+									<label for="nombre" class="label-inside">Nombre</label>
+								</div>
+
+								<div class="input-container">
+									<input type="date" id="fechaInicio" class="input-with-label sec1" placeholder=" " data-valida="fecha">
+									<label for="fechaInicio" class="label-inside">Fecha de inicio</label>
+								</div>
+
+								<div class="input-container">
+									<input type="date" id="fechaFin" class="input-with-label sec1" placeholder=" " data-valida="fecha">
+									<label for="fechaFin" class="label-inside">Fecha de fin</label>
+								</div>
+							</div>
+						</section><br>
+                        																			
+						<button class="enviar" id="enviar" disabled>Enviar formulario</button>																			
+					</div>
+				</div>
+			</div>
+		</div>
+        </form>
+	</div>
+	{% block javascripts %}
+		{{parent()}}
+	{% endblock %}
+{% endblock %}

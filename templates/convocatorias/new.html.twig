@@ -17,18 +17,22 @@
 				<div class="tabs-wrapper">
 					<button class="tab-button active" id="1">Básicos</button>
 					<button class="tab-button" id="2" disabled>Destinatarios</button>
-					<button class="tab-button" id="3" disabled>Baremos</button>
+					<button class="tab-button" id="3" >Baremos</button>
 					<button class="tab-button" id="4" disabled>Idiomas</button>
 				</div>
-				<!-- Agregamos el contenido aquí -->
 				<div
 					id="content" class="content">
-					<!-- Contenido de la pestaña activa -->
 					<div class="tab-content active" id="content1">
 						<section class="secConvocatoria">
 							<h2 id="datConvo">Datos convocatoria</h2>
 							<div>
 								<div class="form-container">
+									<div class="input-container">
+										<select id="id_proyecto" class="input-with-label sec1" data-valida="select">
+											<option value="">Sin seleccionar</option>
+										</select>
+										<label for="id_proyecto" class="label-inside">Proyecto</label>
+									</div>
 
 									<div class="input-container">
 										<input type="text" id="nombre" class="input-with-label sec1" placeholder=" " data-valida="nombre">
@@ -41,48 +45,45 @@
 									</div>
 
 									<div class="input-container">
-										<select id="tipo" class="input-with-label sec1" data-valida="select">
-											<option value="">Sin seleccionar</option>
-											<option value="corto">Corto</option>
-											<option value="largo">Largo</option>
-										</select>
-										<label for="tipo" class="label-inside">Tipo</label>
-									</div>
-
-									<div class="input-container">
-										<input type="number" id="tiempo" class="input-with-label sec1" placeholder=" " data-valida="int">
-										<label for="tiempo" class="label-inside">Tiempo en días</label>
-									</div>
-
-									<div class="input-container">
-										<input type="date" id="fechaInicio" class="input-with-label sec1" placeholder=" " data-valida="fecha">
+										<input type="date" id="fechaInicio" class="input-with-label sec1 date" placeholder=" " data-valida="fecha">
 										<label for="fechaInicio" class="label-inside">Fecha de inicio</label>
 									</div>
 
 									<div class="input-container">
-										<input type="date" id="fechaFin" class="input-with-label sec1" placeholder=" " data-valida="fecha">
+										<input type="date" id="fechaFin" class="input-with-label sec1 date" placeholder=" " data-valida="fecha">
 										<label for="fechaFin" class="label-inside">Fecha de fin</label>
 									</div>
 
 									<div class="input-container">
-										<input type="date" id="fechaPruebasInicio" class="input-with-label sec1" placeholder=" " data-valida="fecha">
+										<input type="date" id="fechaPruebasInicio" class="input-with-label sec1 date" placeholder=" " data-valida="fecha">
 										<label for="fechaPruebasInicio" class="label-inside">Fecha de inicio de pruebas</label>
 									</div>
 
 									<div class="input-container">
-										<input type="date" id="fechaPruebasFin" class="input-with-label sec1" placeholder=" " data-valida="fecha">
+										<input type="date" id="fechaPruebasFin" class="input-with-label sec1 date" placeholder=" " data-valida="fecha">
 										<label for="fechaPruebasFin" class="label-inside">Fecha de fin de pruebas</label>
 									</div>
 
 									<div class="input-container">
-										<input type="date" id="fechaListadoProvisional" class="input-with-label sec1" placeholder=" " data-valida="fecha">
+										<input type="date" id="fechaListadoProvisional" class="input-with-label sec1 date" placeholder=" " data-valida="fecha">
 										<label for="fechaListadoProvisional" class="label-inside">Fecha de listado provisional</label>
 									</div>
 
 									<div class="input-container">
-										<input type="date" id="fechaListadoOficial" class="input-with-label sec1" placeholder=" " data-valida="fecha">
+										<input type="date" id="fechaListadoOficial" class="input-with-label sec1 date" placeholder=" " data-valida="fecha">
 										<label for="fechaListadoOficial" class="label-inside">Fecha de listado oficial</label>
 									</div>
+
+									<div class="input-container">
+										<input type="text" id="tipo" class="input-with-label sec1" placeholder=" " data-valida="nombre" readonly>
+										<label for="tipo" class="label-inside">Tipo</label>
+									</div>
+
+									<div class="input-container">
+										<input type="number" id="tiempo" class="input-with-label sec1" placeholder=" " data-valida="int" readonly>
+										<label for="tiempo" class="label-inside">Tiempo en días</label>
+									</div>
+
 									<!-- Agrega aquí los enlaces a las oportunidades -->
 								</div>
 							</section><br>
@@ -98,14 +99,7 @@
 								<h2 id="datDes">Datos destinatarios</h2>
 								<div id="secDestinatario">
 									<div
-										class="form-container" id="des-container">{# {% for i in 1..5 %}
-																						<div class="checkbox-container">
-																							<label class="form-control">
-																								<input type="checkbox" name="checkbox-checked"/>
-																								Checkbox - checked
-																							</label>
-																						</div>
-																					{% endfor %} #}
+										class="form-container" id="des-container">
 									</div>
 								</div>
 							</section><br>
@@ -115,7 +109,7 @@
 							<section>
 								<h2 id="datBar">Datos baremos</h2>
 								<div id="secBaremos">
-									<table>
+									<table id="baremos">
 										<thead>
 											<tr>
 												<th>Item</th>
@@ -126,106 +120,6 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>
-													<div class="checkbox-container">
-														<input type="checkbox" class="checkbox-custom checkbox-input sec3" id="chkNota" data-valida="chkbox">
-														<label for="miCheckbox" class="checkmark"></label>
-														<span>Nota</span>
-													</div>
-												</td>
-												<td><input type="number" placeholder="Máximo de Nota" data-valida="double" disabled></td>
-												<td>
-													<select disabled data-valida="select">
-														<option value="">Sin seleccionar</option>
-														<option value="si">Sí</option>
-														<option value="no">No</option>
-													</select>
-												</td>
-												<td><input type="number" placeholder="Mínimo de Nota" data-valida="double" disabled></td>
-												<td>
-													<select disabled data-valida="select">
-														<option value="">Sin seleccionar</option>
-														<option value="si">Sí</option>
-														<option value="no">No</option>
-													</select>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<div class="checkbox-container">
-														<input type="checkbox" class="checkbox-custom checkbox-input sec3" id="chkIdioma" data-valida="chkbox">
-														<label for="chkIdioma" class="checkmark"></label>
-														<span>Idioma</span>
-													</div>
-												</td>
-												<td><input type="number" placeholder="Máximo de Nota" data-valida="double" disabled></td>
-												<td>
-													<select disabled data-valida="select">
-														<option value="">Sin seleccionar</option>
-														<option value="si">Sí</option>
-														<option value="no">No</option>
-													</select>
-												</td>
-												<td><input type="number" placeholder="Mínimo de Nota" data-valida="double" disabled></td>
-												<td>
-													<select disabled data-valida="select">
-														<option value="">Sin seleccionar</option>
-														<option value="si">Sí</option>
-														<option value="no">No</option>
-													</select>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<div class="checkbox-container">
-														<input type="checkbox" class="checkbox-custom checkbox-input sec3" id="chkIdoneidad" data-valida="chkbox">
-														<label for="miCheckbox" class="checkmark"></label>
-														<span>Idoneidad</span>
-													</div>
-												</td>
-												<td><input type="number" placeholder="Máximo de Nota" data-valida="double" disabled></td>
-												<td>
-													<select disabled data-valida="select">
-														<option value="">Sin seleccionar</option>
-														<option value="si">Sí</option>
-														<option value="no">No</option>
-													</select>
-												</td>
-												<td><input type="number" placeholder="Mínimo de Nota" data-valida="double" disabled></td>
-												<td>
-													<select disabled data-valida="select">
-														<option value="">Sin seleccionar</option>
-														<option value="si">Sí</option>
-														<option value="no">No</option>
-													</select>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<div class="checkbox-container">
-														<input type="checkbox" class="checkbox-custom checkbox-input sec3" id="chkEntrevista" data-valida="chkbox">
-														<label for="miCheckbox" class="checkmark"></label>
-														<span>Entrevista</span>
-													</div>
-												</td>
-												<td><input type="number" placeholder="Máximo de Nota" data-valida="double" disabled></td>
-												<td>
-													<select disabled data-valida="select">
-														<option value="">Sin seleccionar</option>
-														<option value="si">Sí</option>
-														<option value="no">No</option>
-													</select>
-												</td>
-												<td><input type="number" placeholder="Mínimo de Nota" data-valida="double" disabled></td>
-												<td>
-													<select disabled data-valida="select">
-														<option value="">Sin seleccionar</option>
-														<option value="si">Sí</option>
-														<option value="no">No</option>
-													</select>
-												</td>
-											</tr>
 										</tbody>
 									</table>
 								</div>
@@ -237,9 +131,9 @@
 							<section class="secIdiomas">
 								<h2>Puntuación idiomas</h2>
 								<div id="secIdiomas">
-									<table>
+									<table id="idiomas">
 										<thead>
-											<tr>
+											{# <tr>
 												<th>A1</th>
 												<th>A2</th>
 												<th>B1</th>
@@ -247,16 +141,16 @@
 												<th>C1</th>
 												<th>C2</th>
 												<!-- Agregar más columnas según sea necesario -->
-											</tr>
+											</tr> #}
 										</thead>
 										<tbody>
 											<tr>
-												<td><input type="number" step="0.1" placeholder="A1" data-valida="double" class="sec4"></td>
+												{# <td><input type="number" step="0.1" placeholder="A1" data-valida="double" class="sec4"></td>
 												<td><input type="number" step="0.1" placeholder="A2" data-valida="double" class="sec4"></td>
 												<td><input type="number" step="0.1" placeholder="B1" data-valida="double" class="sec4"></td>
 												<td><input type="number" step="0.1" placeholder="B2" data-valida="double" class="sec4"></td>
 												<td><input type="number" step="0.1" placeholder="C1" data-valida="double" class="sec4"></td>
-												<td><input type="number" step="0.1" placeholder="C2" data-valida="double" class="sec4"></td>
+												<td><input type="number" step="0.1" placeholder="C2" data-valida="double" class="sec4"></td> #}
 											</tr>
 											<!-- Puedes agregar más filas según sea necesario -->
 										</tbody>

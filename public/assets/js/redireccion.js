@@ -39,33 +39,9 @@ window.addEventListener("load", function () { // redireccionado de todas las pá
         document.getElementById("newConvo").addEventListener("click", function () {
             window.location.href = "/convocatorias/new";
         });
-    } else if (window.location.pathname === '/testChooser') {
-        var buttons = document.querySelectorAll(".enter");
-
-        buttons.forEach(function (button) {
-            button.addEventListener("click", function () { // obtengo parametros como get
-                var exId = this.getAttribute("data-exId");
-                var usId = this.getAttribute("data-usId");
-                window.location.href = "/test?exId=" + exId + '&usId=' + usId;
-            });
-        });
-
-        var buttonsCheck = document.querySelectorAll(".check");
-
-        buttonsCheck.forEach(function (button) {
-            button.addEventListener("click", function () { // obtengo parametros como get
-                var exId = this.getAttribute("data-exId");
-                var usId = this.getAttribute("data-usId");
-                window.location.href = "/checkTest?exId=" + exId + '&usId=' + usId;
-            });
-        });
-
-        document.getElementById("cerrarSesion").addEventListener("click", function () {
-            window.location.href = "/logout";
-        });
-
-        document.getElementById("pageBack").addEventListener("click", function () {
-            window.history.back();
+    } else if (window.location.pathname === '/proyectos') {
+        document.getElementById("newProy").addEventListener("click", function () {
+            window.location.href = "/proyectos/new";
         });
     } else if (window.location.pathname === '/checkTest') {
         var buttonsCheck = document.querySelectorAll(".check");

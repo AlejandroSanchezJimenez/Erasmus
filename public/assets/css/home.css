@@ -674,13 +674,13 @@ button:disabled:hover {
 
 .form-control {
     font-family: system-ui, sans-serif;
-    font-size: 1.5rem;
+    font-size: 0.9rem;
     font-weight: bold;
     line-height: 1.1;
     display: grid;
     grid-template-columns: 3em auto;
     gap: 0.5em;
-    margin: 2%;
+    margin: 1%;
     border-right: 4px inset black;
     border-bottom:4px dashed gray;
     padding: 1%;
