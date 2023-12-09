@@ -56,8 +56,8 @@ class Candidato implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 100)]
     private ?string $Password = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private ?array $Roles = null;
+    #[ORM\Column(nullable: true)]
+    private array $Roles = [];
 
     public function __construct()
     {

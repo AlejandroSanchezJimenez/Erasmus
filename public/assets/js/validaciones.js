@@ -15,6 +15,14 @@ HTMLInputElement.prototype.validarCheckbox = function () {
     }
 };
 
+HTMLInputElement.prototype.validaFiles = function () {
+    if (this.type === 'file' && this.files.length > 0) {
+        return true
+    } else {
+        return false
+    }
+};
+
 HTMLInputElement.prototype.esEdad = function () {
     if (this.value == parseInt(this.value) && this.value > 0 && this.value < 120) {
         return true;
@@ -110,6 +118,9 @@ HTMLFormElement.prototype.valida = function () {
             case "double":
                 respuestaCampo = elemento.esDouble();
                 break;
+            case "file":
+                respuestaCampo = elemento.validaFiles();
+                break;
         }
 
         respuesta = respuesta && respuestaCampo;
@@ -156,6 +167,9 @@ HTMLFormElement.prototype.validaOneByOne = function (input) {
             break;
         case "double":
             respuestaCampo = input.esDouble();
+            break;
+        case "file":
+            respuestaCampo = input.validaFiles();
             break;
     }
 

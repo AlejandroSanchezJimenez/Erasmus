@@ -16,9 +16,12 @@
 				<script src="{{asset('assets/js/redireccion.js')}}"></script>
 				<script src="{{asset('assets/js/expandMenu.js')}}"></script>
 				<script src="{{asset('assets/js/seePDF.js')}}"></script>
-				<script src="{{asset('assets/js/mostrarOcultar.js')}}"></script>
+				<script src="{{asset('assets/js/convocatoria.js')}}"></script>
 				<script src="{{asset('assets/js/validaciones.js')}}"></script>
 				<script src="{{asset('assets/js/proyectos.js')}}"></script>
+				<script src="{{asset('assets/js/solicitud.js')}}"></script>
+				<script src="{{asset('assets/js/recortador.js')}}"></script>
+
 			{% endblock %}
 			{% block header %}
 				<div class="barrasup">
@@ -26,7 +29,9 @@
 					<button class="btn-home" id="logo"></button>
 					<p class="grande">Erasmus+ y Cuerpo Europeo de Solidaridad</p>
 					{% if app.user %}
-						<p class="welcome">Bienvenido <br><strong>{{ app.user.userIdentifier }}</strong></p>
+						<p class="welcome">Bienvenido
+							<br><strong>{{ app.user.userIdentifier }}</strong>
+						</p>
 						<a href="{{ path('app_logout') }}">
 							<button class="btn-logout" id="btn-logout" title="Logout"></button>
 						</a>

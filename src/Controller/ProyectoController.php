@@ -5,17 +5,30 @@ namespace App\Controller;
 use App\Entity\Proyecto;
 use App\Repository\ProyectoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProyectoController extends AbstractController
 {
+    private $security;
+    private $proRep;
+
+    public function __construct(Security $security, ProyectoRepository $proRep)
+    {
+        $this->security = $security;
+        $this->proRep = $proRep;
+    }
+
     #[Route('/proyectos', name: 'app_proyecto')]
     public function index(): Response
     {
+        $rol = $this->security->getUser()->getRoles();
+        $proyectos = $this->proRep->findAll();
         return $this->render('proyecto/index.html.twig', [
-            'controller_name' => 'ProyectoController',
+            'proyectos' => $proyectos,
+            'rol' => $rol
         ]);
     }
 

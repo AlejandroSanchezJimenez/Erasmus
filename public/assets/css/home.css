@@ -138,6 +138,10 @@ body {
     display: inline-block;
 }
 
+.tit.solicitud {
+    width: 80%;
+}
+
 .media {
     font-size: 120%;
 }
@@ -423,20 +427,19 @@ button {
 }
 
 .photo-container {
-    width: 3em;
-    height: 4em;
+    width: 7em;
+    height: 10em;
     /* Ajusta el ancho del contenedor de la foto según tus necesidades */
     position: relative;
     float: right;
     margin: 1.5%;
+    background-image: url('../img/tamaño-foto-dni.jpg');
+    background-size: cover;
+    border: 1px solid #ccc;
 }
 
-.photo {
-    width: 3em;
-    height: 4em;
-    height: auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.photo-container:hover {
+    background-image: url('../img/dni-hover.jpg');
 }
 
 .checkbox-container {
@@ -526,7 +529,7 @@ input[type="number"] {
     padding: 10px;
 }
 
-input[type="number"].baremaForm {
+input[type="number"].baremaForm, input[type="file"].fichero {
     width: 40%;
     box-sizing: border-box;
     padding: 10px;
@@ -682,7 +685,7 @@ button:disabled:hover {
     gap: 0.5em;
     margin: 1%;
     border-right: 4px inset black;
-    border-bottom:4px dashed gray;
+    border-bottom: 4px dashed gray;
     padding: 1%;
 }
 
@@ -744,4 +747,114 @@ input[type="checkbox"]:disabled {
 
     color: var(--form-control-disabled);
     cursor: not-allowed;
+}
+
+#modalSeleccion, #modalIdioma, #modalNotas {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-100%, 0);
+    z-index: 999;
+}
+
+#fileInput {
+    display: none;
+}
+
+/* Estilo para el botón del modal */
+.customFileBtn {
+    all: unset;
+    padding: 10px;
+    background-color: #0072C6;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    text-align: center;
+    border: 1px solid black;
+    font-size: 0.9em;
+    width: 100%;
+    margin: 1%;
+}
+
+.customFileBtn:hover {
+    background-color: #005183;
+}
+
+/* Estilo para el nombre del archivo seleccionado */
+#fileName {
+    margin-top: 10px;
+}
+
+#contenedorWebcam {
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    width: 60vw; /* Adjust width as needed */
+    height: 60vh; /* Adjust height as needed */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#player {
+    width: 40%;
+}
+
+#capture-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    margin: 2%;
+}
+
+#capture,
+#saveButton,
+#exitButton {
+    margin-bottom: 10px;
+}
+
+#canvas {
+    width: 100%;
+}
+
+#saveButton {
+    cursor: pointer;
+    background-image: url(../img/save.png);
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px 20px;
+    border: none;
+    border-radius: 5px;
+    border-bottom: 2px solid black;
+}
+
+#capture {
+    cursor: pointer;
+    background-image: url(../img/photo.png);
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px 20px;
+    border: none;
+    border-radius: 5px;
+    border-bottom: 2px solid black;
+}
+
+#exitButton {
+    cursor: pointer;
+    background-image: url(../img/x.png);
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px 20px;
+    border: none;
+    border-radius: 5px;
+    border-bottom: 2px solid black;
+}
+
+#contenedor > input, #notas {
+    width: 70%;
 }
