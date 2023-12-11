@@ -55,6 +55,9 @@ class Solicitud
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $urlIdioma = null;
 
+    #[ORM\Column(length: 100)]
+    private ?string $FotoDNI = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -212,6 +215,18 @@ class Solicitud
     public function setUrlIdioma(?string $urlIdioma): static
     {
         $this->urlIdioma = $urlIdioma;
+
+        return $this;
+    }
+
+    public function getFotoDNI(): ?string
+    {
+        return $this->FotoDNI;
+    }
+
+    public function setFotoDNI(string $FotoDNI): static
+    {
+        $this->FotoDNI = $FotoDNI;
 
         return $this;
     }

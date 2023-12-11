@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% block header%}
+		{{parent()}}
+	{% endblock %}
+	{% block menu %}
+		{{parent()}}
+	{% endblock %}
+	{% block separador %}
+		{{parent()}}
+	{% endblock %}
+	{% block javascripts %}
+		{{parent()}}
+	{% endblock %}
+
+	<div class="contenido">
+		<p class="tit" id="tit">Baremar candidatos "{{convocatoria.Nombre}}" </p>
+		<table class="tbIdiomas">
+			<thead>
+				<tr>
+					<th>A1</th>
+					<th>A2</th>
+					<th>B1</th>
+					<th>B2</th>
+					<th>C1</th>
+					<th>C2</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{ci[0].puntuacion}}</td>
+					<td>{{ci[1].puntuacion}}</td>
+					<td>{{ci[2].puntuacion}}</td>
+					<td>{{ci[3].puntuacion}}</td>
+					<td>{{ci[4].puntuacion}}</td>
+					<td>{{ci[5].puntuacion}}</td>
+				</tr>
+			</tbody>
+		</table><br><br>
+		<input type="text" id="searcher" class="searcher" placeholder="Buscar por DNI">
+		<table id="baremacion">
+			<thead>
+				<tr>
+					<th>DNI</th>
+					<th>Nota (min:
+						{{cb[0].minimo}}; máx:
+						{{cb[0].maximo}})</th>
+					<th>Idioma (min:
+						{{cb[1].minimo}}; máx:
+						{{cb[1].maximo}})</th>
+					<th>Idoneidad (min:
+						{{cb[2].minimo}}; máx:
+						{{cb[2].maximo}})</th>
+					<th>Entrevista (min:
+						{{cb[3].minimo}}; máx:
+						{{cb[3].maximo}})</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if solicitudes is empty %}
+					<tr>
+						<td colspan="5">
+							<center>No hay solicitudes disponibles</center>
+						</td>
+					</tr>
+				{% else %}
+					{% for solicitud in solicitudes %}
+						<tr>
+							<td class="dni" data-id={{solicitud.candidato.id}}>{{solicitud.DNI}} <div class="cargando"></div></td>
+							<td>
+								<div class="form-container">
+									<input type="number" min={{cb[0].minimo}} max={{cb[0].maximo}} step="0.1" class="baremaForm nota" data-id='1' placeholder="Nota">
+									<button class="pdf" data-url={{solicitud.urlNotas}}>Ver PDF</button>
+								</div>
+							</td>
+							<td>
+								<div class="form-container">
+									<input type="number" min={{cb[1].minimo}} max={{cb[1].maximo}} step="0.1" class="baremaForm idioma" data-id='2' placeholder="Idioma">
+									<button class="pdf" data-url={{solicitud.urlIdioma}}>Ver PDF</button>
+								</div>
+							</td>
+							<td><input type="number" min={{cb[2].minimo}} max={{cb[2].maximo}} step="0.1" class="idoneidad" data-id='3' placeholder="Idoneidad"></td>
+							<td><input type="number" min={{cb[3].minimo}} max={{cb[3].maximo}} step="0.1" class="entrevista" data-id='4' placeholder="Entrevista"></td>
+						</tr>
+					{% endfor %}
+				{% endif %}
+				<div id="modalIdioma">
+					<canvas id="canvasIdi" width="500" height="320" style="border:1px solid"></canvas>
+				</div>
+
+				<div id="modalNotas">
+					<canvas id="canvasNot" width="500" height="320" style="border:1px solid"></canvas>
+				</div>
+			</tbody>
+		</table>
+
+	</div>
+{% endblock %}

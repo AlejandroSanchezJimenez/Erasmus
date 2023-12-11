@@ -302,12 +302,12 @@ window.addEventListener('DOMContentLoaded', function () {
                 });
 
                 if (todosValidos) {
-                    if (document.querySelector('.tab-content.active').id == 'content1') {
+                    if (document.querySelector('.tab-content.active').id == 'content1' || document.querySelector('.tab-content.active').id == 'content2') {
                         document.querySelector('button.active').nextElementSibling.removeAttribute('disabled')
                     } else if (document.querySelector('.tab-content.active').id == 'content3') {
                         var fila = target.closest('tr');
                         var inputsfila = fila.getElementsByTagName('input')
-                        if (inputsfila[0].id == 'chkIdioma') {
+                        if (inputsfila[0].classList.contains('Idioma')) {
                             document.querySelector('button.active').nextElementSibling.removeAttribute('disabled')
                         } else {
                             var buttons = document.querySelectorAll('.enviar')

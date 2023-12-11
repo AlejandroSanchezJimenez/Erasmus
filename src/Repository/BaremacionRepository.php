@@ -21,6 +21,16 @@ class BaremacionRepository extends ServiceEntityRepository
         parent::__construct($registry, Baremacion::class);
     }
 
+    public function findByDNI($dni)
+   {
+       $conn = $this->getEntityManager()
+           ->getConnection();
+       $sql = 'select * from baremacion b join candidato c on b.candidato_id=c.id where c.dni like '.$dni.'%;';
+       $stmt = $conn->prepare($sql);
+       $result = $stmt->executeQuery();
+       return $result->fetchAllAssociative();
+   }
+
 //    /**
 //     * @return Baremacion[] Returns an array of Baremacion objects
 //     */

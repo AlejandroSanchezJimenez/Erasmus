@@ -89,7 +89,8 @@ window.addEventListener('DOMContentLoaded', function () {
                 var dataURL = canvasRecortado.toDataURL();
 
                 foto.style.backgroundImage = `url('${dataURL}')`;
-                player.srcObject = null;
+                var video = player.srcObject.getTracks()
+                video[0].stop()
             })
 
             var exit = document.getElementById('exitButton')
@@ -98,7 +99,8 @@ window.addEventListener('DOMContentLoaded', function () {
                 ev.preventDefault()
                 contenedor.style.display = 'none'
                 fondo.style.display = 'none'
-                player.srcObject = null;
+                var video = this.player.srcObject.getTracks()
+                video[0].stop()
             })
 
             navigator.mediaDevices.getUserMedia(constraint).then((stream) => {
@@ -113,7 +115,11 @@ window.addEventListener('DOMContentLoaded', function () {
             element.addEventListener('click', function (ev) {
                 ev.preventDefault();
 
-                if (element.id === 'notas') {
+                if (modal != undefined) {
+                    modal.style.display = 'none';
+                }
+
+                if (element.id == 'pdfNotas') {
                     input = document.getElementById('notas');
                     modal = document.getElementById('modalNotas');
                 } else {
@@ -122,7 +128,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
 
                 document.addEventListener('click', function (event) {
-                    if (!modal.contains(event.target)  && event.target !== element) {
+                    if (!modal.contains(event.target) && event.target !== element) {
                         modal.style.display = 'none';
                     }
                 });
@@ -165,6 +171,8 @@ window.addEventListener('DOMContentLoaded', function () {
             if (image != 'url("https://localhost:8000/assets/img/taman%CC%83o-foto-dni.jpg")') {
                 document.getElementById('fileInput').className = 'valido'
                 foto.style.border = '1px solid green'
+            } else {
+                foto.style.border = '1px solid red'
             }
 
             var elementosDeEntrada = document.querySelectorAll('input')
@@ -174,7 +182,39 @@ window.addEventListener('DOMContentLoaded', function () {
             });
 
             if (todosValidos) {
-                console.log('yepa')
+                var conId = document.querySelector('.tit.solicitud').getAttribute("data-conId");
+                var canId = document.querySelector('.form-container').getAttribute("data-canId");
+
+                var idiomaFileInput = document.getElementById('idioma');
+                var notasFileInput = document.getElementById('notas');
+
+                // Crear un objeto FormData
+                var formData = new FormData();
+                formData.append('idioma', idiomaFileInput.files[0]);
+                formData.append('notas', notasFileInput.files[0]);
+
+                // Obtener la imagen de fondo y agregarla al FormData
+                var imageUrl = window.getComputedStyle(document.getElementById('modalFoto')).getPropertyValue('background-image').replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+
+                fetch(imageUrl)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        formData.append('fotoDNI', blob, 'fotoDNI.png');
+
+                        // Realizar la solicitud POST utilizando FormData
+                        fetch("https://localhost:8000/solicitud/api/new?conId="+conId+"&canId="+canId, {
+                            method: 'POST',
+                            body: formData,
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                alert('Solicitud aceptada con éxito:', data);
+                            })
+                            .catch(error => {
+                                alert('Error al aceptar la convocatoria:', error);
+                            });
+                    });
+
             }
         })
 

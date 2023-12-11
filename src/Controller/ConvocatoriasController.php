@@ -12,6 +12,7 @@ use App\Entity\Destinatario;
 use App\Entity\NivelIdioma;
 use App\Entity\Proyecto;
 use App\Repository\CandidatoRepository;
+use App\Repository\ConvocatoriaBaremablesRepository;
 use App\Repository\ConvocatoriaIdiomaRepository;
 use App\Repository\ConvocatoriaRepository;
 use App\Repository\DestinatarioRepository;
@@ -33,11 +34,15 @@ class ConvocatoriasController extends AbstractController
 {
     private $security;
     private $user;
+    private $conRep;
+    private $cobRep;
 
-    public function __construct(Security $security, CandidatoRepository $user)
+    public function __construct(Security $security, CandidatoRepository $user, ConvocatoriaRepository $conRep, ConvocatoriaBaremablesRepository $cobRep)
     {
         $this->security = $security;
         $this->user = $user;
+        $this->conRep = $conRep;
+        $this->cobRep = $cobRep;
     }
 
     #[Route('/convocatorias/form', name: 'app_formconvo')]
@@ -45,17 +50,28 @@ class ConvocatoriasController extends AbstractController
     {
         $dni = $this->security->getUser()->getUserIdentifier();
         $candidato = $this->user->findOneBy(['DNI' => $dni]);
+        $id = $_GET['conId'];
+        $convocatoria = $this->conRep->find($id);
+        $convocatoriaBaremables = $this->cobRep->findBy(['Convocatoria' => $id]);
 
         return $this->render('convocatorias/form.html.twig', [
             'candidato' => $candidato,
+            'convocatoria' => $convocatoria,
+            'baremos' => $convocatoriaBaremables
         ]);
     }
 
     #[Route('/convocatorias', name: 'app_convocatorias')]
     public function index(): Response
     {
+        if (isset($_GET['proId'])) {
+            $convocatorias = $this->conRep->findBy(['Proyecto' => $_GET['proId']]);
+        } else {
+            $convocatorias = $this->conRep->findAll();
+        }
+        
         return $this->render('convocatorias/index.html.twig', [
-            'controller_name' => 'ConvocatoriasController',
+            'convocatorias' => $convocatorias,
         ]);
     }
 

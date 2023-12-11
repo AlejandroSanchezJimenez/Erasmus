@@ -15,7 +15,7 @@
 	{% endblock %}
 	<div class="contenido">
 		<h1>Proyectos abiertos
-			{% if rol=="ROLE_ADMIN"%}
+			{% if 'ROLE_ADMIN' in app.user.roles %}
 				<button class="newProy" id="newProy">Nuevo proyecto</button>
 			{% endif %}
 		</h1>

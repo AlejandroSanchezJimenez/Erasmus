@@ -14,43 +14,71 @@
 		{{parent()}}
 	{% endblock %}
 	<div class="contenido">
-		<h1>Convocatorias abiertas <button class="newConvo" id="newConvo">Nueva convocatoria</button></h1>
+		<h1>Convocatorias abiertas
+			<button class="newConvo" id="newConvo">Nueva convocatoria</button>
+		</h1>
 		<br><br>
 		<main>
 			<section>
 				<p class="media">
 					Bienvenido a la sección de las solicitudes Erasmus+. Desde aquí puede solicitar una o más acciones apoyadas por el programa Erasmus+ y gestionadas por las Agencias Nacionales Erasmus+. Abajo puede encontrar las solicitudes clasificadas según el ámbito de oportunidad o por acción clave.<br><br>
 					Si buscas información sobre el Cuerpo Europeo de Solidaridad, visita el
-															Antes de comenzar su solicitud, compruebe que su organización dispone de un único ID de la organización (OID), como requisito para participar en acciones de Erasmus+ gestionadas por las Agencias Nacionales. Puede buscar su ID de la organización (OID) o registrar una nueva organización usando la plataforma Erasmus+ y Cuerpo Europeo de Solidaridad
+																									Antes de comenzar su solicitud, compruebe que su organización dispone de un único ID de la organización (OID), como requisito para participar en acciones de Erasmus+ gestionadas por las Agencias Nacionales. Puede buscar su ID de la organización (OID) o registrar una nueva organización usando la plataforma Erasmus+ y Cuerpo Europeo de Solidaridad
 				</p>
 			</section><br>
-        
-        <div class="convo-div">
-            {% for i in 1..5 %}
-			<div class="convo-box">
-				<h3>Acreditación Erasmus para consorcios de movilidad de Educación Superior (KA130-HED)</h3>
-                <hr>
-                <p>Número de modalidades: <strong>5</strong></p>
-                <p>Tipo de convocatoria: <strong>Corta (30 días)</strong></p>
-                <p>Fecha inicio: <strong>{{ "now"|date("d/m/Y") }}</strong></p>
-                <p>Fecha límite: <strong>{{ "now"|date("d/m/Y") }}</strong></p>
-                <p>Fecha inicio pruebas: <strong>{{ "now"|date("d/m/Y") }}</strong></p>
-                <p>Fecha límite pruebas: <strong>{{ "now"|date("d/m/Y") }}</strong></p>
-                <p>Fecha lista provisional: <strong>{{ "now"|date("d/m/Y") }}</strong></p>
-                <p>Fecha lista oficial: <strong>{{ "now"|date("d/m/Y") }}</strong></p>
-                <br><br>
-				{% if app.user %}
-						<a href="{{ path('app_formconvo') }}">
-							<button class="expandInfo" id="expandInfo">Solicitar</button>
-						</a>
-					{% else %}
-						<a href="{{ path('app_login') }}">
-							<button class="expandInfo" id="expandInfo">Solicitar</button>
-						</a>
-					{% endif %}
+
+			<div class="convo-div">
+				{% if convocatorias is empty %}
+					<div class="convo-box">
+						<hr>
+						<h3>
+							No hay convocatorias disponibles para este proyecto.</h3>
+						<hr>
+					</div>
+				{% else %}
+					{% for convocatoria in convocatorias %}
+						<div class="convo-box">
+							<h3>
+								{{convocatoria.Nombre}}
+								({{convocatoria.Proyecto.Codigo}})</h3>
+							<hr>
+							<p>Número de modalidades:
+								<strong>{{convocatoria.Movilidades}}</strong>
+							</p>
+
+							<p>Tipo de convocatoria:
+								<strong>{{convocatoria.Tipo}}</strong>
+							</p>
+							<p>Fecha inicio:
+								<strong>{{convocatoria.Fechaini|date("d/m/Y") }}</strong>
+							</p>
+							<p>Fecha límite:
+								<strong>{{convocatoria.Fechafin|date("d/m/Y") }}</strong>
+							</p>
+							<p>Fecha inicio pruebas:
+								<strong>{{convocatoria.Fechainipruebas|date("d/m/Y") }}</strong>
+							</p>
+							<p>Fecha límite pruebas:
+								<strong>{{convocatoria.Fechafinpruebas|date("d/m/Y") }}</strong>
+							</p>
+							<p>Fecha lista provisional:
+								<strong>{{convocatoria.Fechalistaprov|date("d/m/Y") }}</strong>
+							</p>
+							<p>Fecha lista oficial:
+								<strong>{{convocatoria.Fechalistafinal|date("d/m/Y") }}</strong>
+							</p>
+							<br><br>
+							{% if app.user %}
+								<button class="expandInfo" id="expandInfo" data-id={{convocatoria.id}}>Solicitar</button>
+							{% else %}
+								<a href="{{ path('app_login') }}">
+									<button class="expandInfo" id="expandInfo">Solicitar</button>
+								</a>
+							{% endif %}
+						</div>
+					{% endfor %}
+				{% endif %}
 			</div>
-            {% endfor %}
-        </div>
 		</main>
 
 	</div>

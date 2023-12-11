@@ -56,8 +56,8 @@ class Candidato implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 100)]
     private ?string $Password = null;
 
-    #[ORM\Column(nullable: true)]
-    private array $Roles = [];
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private ?array $Roles = null;
 
     public function __construct()
     {
@@ -270,7 +270,7 @@ class Candidato implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->Roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_ADMIN';
 
         return array_unique($roles);
     }
