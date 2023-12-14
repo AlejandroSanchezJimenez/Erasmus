@@ -59,6 +59,25 @@ HTMLInputElement.prototype.esDNI = function () {
     return correcto;
 }
 
+HTMLInputElement.prototype.esCorreo = function () {
+    // Utiliza una expresión regular para validar el formato del correo electrónico
+    var regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (regexCorreo.test(this.value)) {
+        return true
+    } else {
+        return false
+    }
+}
+
+HTMLInputElement.prototype.esTelefono = function () {
+    var regexTelefono = (/^([6-9]\d{8})$/);
+    if (regexTelefono.test(this.value)) {
+        return true
+    } else {
+        return false
+    }
+}
+
 HTMLInputElement.prototype.esFecha = function () {
     var fecha = new Date(this.value);
 
@@ -121,6 +140,10 @@ HTMLFormElement.prototype.valida = function () {
             case "file":
                 respuestaCampo = elemento.validaFiles();
                 break;
+            case "tlf":
+                respuestaCampo = elemento.esTelefono();
+            case "correo":
+                respuestaCampo = elemento.esCorreo();
         }
 
         respuesta = respuesta && respuestaCampo;
@@ -171,6 +194,10 @@ HTMLFormElement.prototype.validaOneByOne = function (input) {
         case "file":
             respuestaCampo = input.validaFiles();
             break;
+        case "tlf":
+            respuestaCampo = input.esTelefono();
+        case "correo":
+            respuestaCampo = input.esCorreo();
     }
 
     respuesta = respuesta && respuestaCampo;

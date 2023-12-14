@@ -21,7 +21,8 @@ body {
 
 .btn-menu {
     margin: 1%;
-    display: inline-block;
+    display: none;
+    visibility: hidden;
     padding: 20px 20px;
     /* Ajusta el padding según tus necesidades */
     text-align: center;
@@ -143,7 +144,7 @@ body {
 }
 
 .media {
-    font-size: 120%;
+    font-size: 100%;
 }
 
 .contenedor {
@@ -263,10 +264,36 @@ body {
     /* Color del borde */
 }
 
+.solicitudes {
+    /* Color del texto del ícono */
+    font-size: 24px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    background-image: url('../img/my-request.png');
+    background-size: cover;
+    background-color: #f5f5f5;
+    margin: 20%;
+    display: inline-block;
+    padding: 25px 25px;
+    /* Ajusta el padding según tus necesidades */
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    /* Color de fondo del botón */
+    color: #ffffff;
+    /* Color del texto del botón */
+    border: none;
+    /* Elimina el borde del botón */
+    border-radius: 5px;
+    border-bottom: 2px solid black;
+    /* Color del borde */
+}
+
 .home:hover,
 .proyectos:hover,
 .convocatorias:hover,
-.baremar:hover {
+.baremar:hover,
+.solicitudes:hover {
     background-color: #e0e0e0;
     /* Cambia el color de fondo al pasar el ratón */
 }
@@ -567,7 +594,7 @@ table tr {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
-    width: 60%;
+    width: 40%;
 }
 
 .login-container:hover {
@@ -935,4 +962,76 @@ input[type="checkbox"]:disabled {
 .tbIdiomas {
     width: 40%;
     float: right;
+}
+
+.no-result-message {
+    color: #888;
+    /* Color de texto gris o el que prefieras */
+    font-size: 24px;
+    /* Tamaño de fuente ajustable */
+    text-align: center;
+    /* Centrar horizontalmente */
+    margin: 0;
+    /* Eliminar cualquier margen predefinido */
+}
+
+.barra-filtrar {
+    width: 50px;
+    background-color: #f5f5f5;
+    /* Fondo blanco */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid #e0e0e0;
+    padding-top: 2%;
+}
+
+.texto-torcido {
+    padding-right: 50px;
+    transform: rotate(-90deg);
+    /* Color del texto */
+    white-space: nowrap;
+    font-weight: bold;
+    color: black;
+    /* z-index: 1; */
+    display: inline-block;
+    flex-direction: row;
+    padding-left: 1%;
+    /* Evita el salto de línea automático */
+}
+
+.expand {
+    color: #0072C6;
+    /* Color del texto del ícono */
+    font-size: 24px;
+    margin-bottom: 5%;
+    cursor: pointer;
+    background-image: url('../img/6364375.png');
+    background-size: cover;
+    background-color: #f5f5f5;
+    margin: 20%;
+    display: inline-block;
+    padding: 10px 10px;
+    /* Ajusta el padding según tus necesidades */
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    /* Color de fondo del botón */
+    color: #ffffff;
+    /* Color del texto del botón */
+    border: none;
+    /* z-index: 2; */
+}
+
+.expand:hover {
+    background-color: grey;
+}
+
+.maximizado {
+    display: none;
+}
+
+.register-container select {
+    width: 30%;
+    margin: 1.6%;
 }

@@ -1,16 +1,15 @@
 window.addEventListener('DOMContentLoaded', function () {
 
-    if (window.location.pathname === '/convocatorias/new') {
+    if (window.location.pathname === '/convocatorias/new') { // comprobación de ubicación
         var inputs = document.querySelectorAll('input, select')
         var form = document.getElementsByTagName('form')
         var contenedor = document.body;
 
-        fetch("https://localhost:8000/proyectos/api")
+        fetch("https://localhost:8000/proyectos/api") // relleno el select de proyectos
             .then(x => x.json())
             .then(y => {
                 var select = document.getElementById('id_proyecto');
 
-                // Limpiar opciones existentes, si es necesario
                 select.innerHTML = '';
 
                 var option = document.createElement("option");
@@ -18,8 +17,6 @@ window.addEventListener('DOMContentLoaded', function () {
                 option.value = '';
                 select.appendChild(option);
 
-
-                // Agregar opciones al select después del bucle
                 for (let i = 0; i < y.length; i++) {
                     var option = document.createElement("option");
                     option.innerHTML = y[i].nombre;
@@ -28,7 +25,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
-        fetch("https://localhost:8000/destinatario/api")
+        fetch("https://localhost:8000/destinatario/api") // relleno la pestaña de destinatarios
             .then(x => x.json())
             .then(y => {
                 for (let i = 0; i < y.length; i++) {
@@ -49,7 +46,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
-        fetch("https://localhost:8000/nivelidiomas/api")
+        fetch("https://localhost:8000/nivelidiomas/api") // relleno la tabla de idiomas 
             .then(x => x.json())
             .then(y => {
                 var tabla = document.getElementById('idiomas');
@@ -79,7 +76,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 tbody.appendChild(nuevaFilaBody)
             });
 
-        fetch("https://localhost:8000/itembaremable/api") // relleno el select con categorias
+        fetch("https://localhost:8000/itembaremable/api") // por cada item baremable creo nuevas columnas y filas y le doy los atributos necesarios a cada elemento
             .then(response => response.json())
             .then(item => {
                 var tabla = document.getElementById('baremos');
@@ -89,7 +86,6 @@ window.addEventListener('DOMContentLoaded', function () {
                     const newRow = document.createElement('tr');
                     newRow.className = 'tr'
 
-                    // Crear el primer celda con un div interno
                     const cell1 = document.createElement('td');
                     const checkboxContainer = document.createElement('div');
                     const checkbox = document.createElement('input');
@@ -111,7 +107,6 @@ window.addEventListener('DOMContentLoaded', function () {
                     checkboxContainer.appendChild(checkboxLabelText);
                     cell1.appendChild(checkboxContainer);
 
-                    // Crear el resto de las celdas
                     const cell2 = document.createElement('td');
                     const maxNotaInput = document.createElement('input');
                     maxNotaInput.type = 'number';
@@ -193,7 +188,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         var fechas = document.querySelectorAll('.date')
 
-        fechas.forEach(element => {
+        fechas.forEach(element => { // controlador de fechas 
             element.addEventListener('change', function (ev) {
                 console.log()
                 switch (element.id) {
@@ -266,12 +261,10 @@ window.addEventListener('DOMContentLoaded', function () {
             })
         });
 
-        // inputs.forEach(function (inputElement) {
-        contenedor.addEventListener('input', function (event) {
+        contenedor.addEventListener('input', function (event) { // controlador principal de validación
             var target = event.target;
             console.log(target.className)
 
-            // Verifica si el elemento clicado es un input con la clase 'checkbox-input'
             if (target.matches('input, select')) {
                 form[0].validaOneByOne(event.target);
 
@@ -340,52 +333,13 @@ window.addEventListener('DOMContentLoaded', function () {
                             element.setAttribute('disabled', 'true');
                         });
                     }
-
-                    // if (document.querySelector('.tab-content.active').id == 'content3') {
-                    //     // Obtener la referencia a la tabla
-                    //     var tabla = document.getElementById('baremos');
-
-                    //     // Obtener todas las filas dentro del tbody
-                    //     var filas = tabla.getElementsByClassName('tr');
-                    //     var filaactiva = false
-                    //     // Iterar sobre cada fila
-                    //     for (var i = 0; i < filas.length; i++) {
-                    //         var fila = filas[i];
-
-                    //         // Obtener todas las celdas de la fila
-                    //         var inputs = fila.querySelectorAll('select, input');
-
-                    //         // Iterar sobre cada celda de la fila
-                    //         var todosValidos = Array.from(inputs).every(function (elemento) {
-                    //             return elemento.classList.contains('valido');
-                    //         });
-
-                    //         // Hacer algo con el resultado de la verificación
-                    //         if (todosValidos) {
-                    //             filaactiva = true
-                    //             break
-                    //         } else {
-                    //             filaactiva = false
-                    //         }
-                    //     }
-
-                    //     if (!filaactiva) {
-                    //         var buttons = document.querySelectorAll('.enviar')
-                    //         buttons.forEach(element => {
-                    //             element.setAttribute('disabled','true');
-                    //         });
-                    //     }
-
-
-                    // }
                 }
             }
         });
-        // });
 
         var sections = document.querySelectorAll('.tab-button');
 
-        sections.forEach(element => {
+        sections.forEach(element => { // por cada sección cambio el display según click
             element.addEventListener('click', function (ev) {
                 ev.preventDefault()
                 var actives = document.querySelectorAll('.active');
@@ -397,21 +351,19 @@ window.addEventListener('DOMContentLoaded', function () {
 
                 element.classList.add('active');
 
-                content.classList.add('active'); // Remove 'active' class from content
+                content.classList.add('active');
             });
         });
 
-        setTimeout(() => {
+        setTimeout(() => { // uso setTimeOut para evitar que en la validación estos inputs no se cojan
             var checkboxes = document.querySelectorAll('table td input.checkbox-input');
 
             checkboxes.forEach(function (checkbox) {
                 checkbox.addEventListener('click', function () {
                     var fila = this.closest('tr');
 
-                    // Obtener todos los selects e inputs en la fila
                     var selectsEInputs = fila.querySelectorAll('select, input');
 
-                    // Iterar sobre los selects e inputs y cambiar el atributo 'disabled'
                     selectsEInputs.forEach(function (elemento) {
                         if (checkbox.checked) {
                             elemento.removeAttribute('disabled');
@@ -430,7 +382,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         var butt2 = document.getElementById('2')
 
-        butt2.addEventListener('click', function () {
+        butt2.addEventListener('click', function () { // si hay más de un checkbox señalado me deja avanzar
             if (document.querySelectorAll('.active#content2').length > 0) {
 
                 var checks = document.querySelectorAll('.active input[type=checkbox]');
@@ -451,18 +403,16 @@ window.addEventListener('DOMContentLoaded', function () {
 
         var buttons = document.querySelectorAll('.enviar')
 
-        buttons.forEach(element => {
+        buttons.forEach(element => { // envio de convocatoria entero
             element.addEventListener('click', function (ev) {
                 ev.preventDefault()
 
-                // CONVOCATORIA 
                 var comboCorr = document.getElementById('id_proyecto');
                 var selectedCorr = comboCorr.options[comboCorr.selectedIndex].value;
 
                 var checkboxesMarcados = document.querySelectorAll('input[type="checkbox"].destinatarios:checked');
                 var valoresCheckboxDes = [];
 
-                // Iterar sobre los elementos checkbox marcados y leer sus valores
                 checkboxesMarcados.forEach(function (checkbox) {
                     var valorCheckbox = checkbox.value;
                     valoresCheckboxDes.push(valorCheckbox);
@@ -493,7 +443,6 @@ window.addEventListener('DOMContentLoaded', function () {
                 var checkboxesMarcados = document.querySelectorAll('input.sec4');
                 var valoresCheckboxIdi = [];
 
-                // Iterar sobre los elementos checkbox marcados y leer sus valores
                 checkboxesMarcados.forEach(function (checkbox) {
                     var valorCheckbox = checkbox.value;
                     var idCheckbox = checkbox.id;
@@ -502,6 +451,14 @@ window.addEventListener('DOMContentLoaded', function () {
                         id: idCheckbox
                     });
                 });
+
+                var allEmpty = valoresCheckboxIdi.every(function(item) {
+                    return item.valor.trim() === '';
+                });
+
+                if (allEmpty) {
+                    valoresCheckboxIdi = null
+                }
 
                 const postConvocatoriaData = {
                     idProyecto: selectedCorr,
@@ -521,7 +478,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
                 console.log(postConvocatoriaData)
 
-                fetch("https://localhost:8000/convocatorias/api/new", { // envío el post
+                fetch("https://localhost:8000/convocatorias/api/new", { 
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -537,6 +494,15 @@ window.addEventListener('DOMContentLoaded', function () {
                     });
             });
         });
+    } else if (window.location.pathname === '/convocatorias') { // js para convocatorias en stand by
+        var div = document.getElementById('barra-filtrar');
+        var filter = document.getElementById('filter')
+        filter.addEventListener('click', function() {
+            div.style.width = '200px'
+            div.style.display = 'inline-block'
+            document.getElementById('filter-tit').style.transform = 'none'
+            document.getElementById('filter').style.float = 'right'
+        }) 
     }
 
 

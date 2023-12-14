@@ -14,6 +14,7 @@ use App\Repository\ConvocatoriaIdiomaRepository;
 use App\Repository\ConvocatoriaRepository;
 use App\Repository\ItemBaremableRepository;
 use App\Repository\SolicitudRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -42,7 +43,14 @@ class BaremacionController extends AbstractController
     #[Route('/baremacion', name: 'app_baremacion')]
     public function index(): Response
     {
-        $convocatorias = $this->conRep->findAll();
+        $currentDateTime = new DateTime();
+            $convocatorias = $this->conRep->findAll();
+            $convocatorias = $this->conRep->createQueryBuilder('c')
+                ->Where('c.Fecha_ini_pruebas > :currentDateTime')
+                ->setParameter('currentDateTime', $currentDateTime)
+                ->orderBy('c.Fecha_ini_pruebas', 'ASC')
+                ->getQuery()
+                ->getResult();
         return $this->render('baremacion/index.html.twig', [
             'convocatorias' => $convocatorias,
         ]);

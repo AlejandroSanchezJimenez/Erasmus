@@ -13,6 +13,7 @@ use App\Entity\NivelIdioma;
 use App\Entity\Proyecto;
 use App\Repository\CandidatoRepository;
 use App\Repository\ConvocatoriaBaremablesRepository;
+use App\Repository\ConvocatoriaDestinatarioRepository;
 use App\Repository\ConvocatoriaIdiomaRepository;
 use App\Repository\ConvocatoriaRepository;
 use App\Repository\DestinatarioRepository;
@@ -36,13 +37,17 @@ class ConvocatoriasController extends AbstractController
     private $user;
     private $conRep;
     private $cobRep;
+    private $candi;
+    private $cdRep;
 
-    public function __construct(Security $security, CandidatoRepository $user, ConvocatoriaRepository $conRep, ConvocatoriaBaremablesRepository $cobRep)
+    public function __construct(Security $security, CandidatoRepository $user, ConvocatoriaRepository $conRep, ConvocatoriaBaremablesRepository $cobRep, ConvocatoriaDestinatarioRepository $cdRep, CandidatoRepository $candi)
     {
         $this->security = $security;
         $this->user = $user;
         $this->conRep = $conRep;
         $this->cobRep = $cobRep;
+        $this->candi = $candi;
+        $this->cdRep = $cdRep;
     }
 
     #[Route('/convocatorias/form', name: 'app_formconvo')]
@@ -65,13 +70,34 @@ class ConvocatoriasController extends AbstractController
     public function index(): Response
     {
         if (isset($_GET['proId'])) {
-            $convocatorias = $this->conRep->findBy(['Proyecto' => $_GET['proId']]);
-        } else {
+            $currentDateTime = new DateTime();
             $convocatorias = $this->conRep->findAll();
+            $convocatorias = $this->conRep->createQueryBuilder('c')
+                ->Where('c.Fecha_ini_pruebas > :currentDateTime')
+                ->andWhere('c.Proyecto = :idpro')
+                ->setParameter('currentDateTime', $currentDateTime)
+                ->setParameter('idpro', $_GET['proId'])
+                ->orderBy('c.Fecha_ini_pruebas', 'ASC')
+                ->getQuery()
+                ->getResult();
+            // $convocatorias = $this->conRep->findBy(['Proyecto' => $_GET['proId']]);
+        } else {
+            $currentDateTime = new DateTime();
+            $convocatorias = $this->conRep->findAll();
+            $convocatorias = $this->conRep->createQueryBuilder('c')
+                ->Where('c.Fecha_ini_pruebas > :currentDateTime')
+                ->setParameter('currentDateTime', $currentDateTime)
+                ->orderBy('c.Fecha_ini_pruebas', 'ASC')
+                ->getQuery()
+                ->getResult();
         }
-        
+
+        // $id = $_GET['conId'];
+        // $destinatarios = $this->cdRep->findBy(['Convocatoria' => $id]);
+
         return $this->render('convocatorias/index.html.twig', [
             'convocatorias' => $convocatorias,
+            // 'destinatarios' => $destinatarios
         ]);
     }
 
@@ -98,7 +124,7 @@ class ConvocatoriasController extends AbstractController
         $fechafinprue = new DateTime($data['fechaPruebasFin']);
         $fechalisprov = new DateTime($data['fechaListadoProvisional']);
         $fechalisofi = new DateTime($data['fechaListadoOficial']);
-    
+
         $convocatoria = new Convocatoria();
         $proyecto = new Proyecto();
         $proyecto = $proRep->find($idproyecto);
@@ -112,29 +138,29 @@ class ConvocatoriasController extends AbstractController
         $convocatoria->setFechaIniPruebas($fechainiprue);
         $convocatoria->setFechaFinPruebas($fechafinprue);
         $convocatoria->setFechaListaProv($fechalisprov);
-        $convocatoria->setFechaListaFinal($fechalisofi);       
+        $convocatoria->setFechaListaFinal($fechalisofi);
 
         $entityManager->persist($convocatoria);
         $entityManager->flush();
 
         foreach ($data['destinatarios'] as $idDestinatario) {
             $destinatario = $desRep->find($idDestinatario);
-    
+
             if ($destinatario) {
                 $condes = new ConvocatoriaDestinatario();
                 $condes->setConvocatoria($convocatoria);
                 $condes->setDestinatario($destinatario);
-    
+
                 $entityManager->persist($condes);
             }
         }
-    
+
         $entityManager->flush();
 
         foreach ($data['baremos'] as $baremo) {
             // Obtener el objeto Baremo
             $idBaremo = $itebRep->find($baremo['idBaremo']);
-        
+
             if ($idBaremo) {  // Verificar si se encontró el baremo
                 $conbar = new ConvocatoriaBaremables();
                 $conbar->setConvocatoria($convocatoria);
@@ -143,22 +169,26 @@ class ConvocatoriasController extends AbstractController
                 $conbar->setRequisito($baremo['Requisito'] === "true" ? true : false);
                 $conbar->setMinimo($baremo['Minimo']);
                 $conbar->setAportaCandidato($baremo['Aporta'] === "true" ? true : false);
-        
+
                 $entityManager->persist($conbar);
             }
         }
 
-        foreach ($data['idiomas'] as $idioma) {
-            // Obtener el objeto Baremo
-            $conidi = new ConvocatoriaIdioma();
-            $conidi->setConvocatoria($convocatoria);
-            $conidi->setNivelIdioma($nividiRep->find($idioma['id']));
-            $conidi->setPuntuacion($idioma['valor']);
-
-            $entityManager->persist($conidi);
-        }
-    
         $entityManager->flush();
+
+        if ($data['idiomas'] !== null) {
+            foreach ($data['idiomas'] as $idioma) {
+                // Obtener el objeto Baremo
+                $conidi = new ConvocatoriaIdioma();
+                $conidi->setConvocatoria($convocatoria);
+                $conidi->setNivelIdioma($nividiRep->find($idioma['id']));
+                $conidi->setPuntuacion($idioma['valor']);
+
+                $entityManager->persist($conidi);
+            }
+
+            $entityManager->flush();
+        }
 
         return $this->json(['message' => 'Convocatoria creada'], 201);
     }

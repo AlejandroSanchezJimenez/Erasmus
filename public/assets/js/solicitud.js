@@ -1,10 +1,10 @@
 window.addEventListener('DOMContentLoaded', function () {
 
-    if (window.location.pathname === '/convocatorias/form') {
+    if (window.location.pathname === '/convocatorias/form') { // comprobación de ubicación
         var foto = document.getElementById('modalFoto');
         var modalElemento = document.getElementById('modalSeleccion');
 
-        foto.addEventListener('click', function (event) {
+        foto.addEventListener('click', function (event) { // modal de selección de foto 
             const fotoRect = foto.getBoundingClientRect();
             const margenPorcentaje = 1.5;
             const margenX = (fotoRect.width * margenPorcentaje) / 100;
@@ -18,13 +18,13 @@ window.addEventListener('DOMContentLoaded', function () {
             modalElemento.style.display = 'block';
         })
 
-        document.addEventListener('click', function (event) {
+        document.addEventListener('click', function (event) { // salida del modal mediante click externo
             if (!modalElemento.contains(event.target) && event.target !== foto) {
                 modalElemento.style.display = 'none';
             }
         });
 
-        fileInput.addEventListener('change', function (event) {
+        fileInput.addEventListener('change', function (event) { // cargado de la foto como background image
             modalElemento.style.display = 'none'
             var reader = new FileReader();
 
@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         var webcamButt = document.getElementById('webcamButt')
 
-        webcamButt.addEventListener('click', function (ev) {
+        webcamButt.addEventListener('click', function (ev) { // lógica de la webcam
             ev.preventDefault()
             modalElemento.style.display = 'none'
             var fondo = document.createElement("div");
@@ -68,7 +68,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
             captureButton.addEventListener('click', (ev) => {
                 ev.preventDefault()
-                // Draw the video frame to the canvas.
+
                 context.drawImage(player, 0, 0, canvas.width, canvas.height);
 
                 if (document.getElementById('recuadro')) {
@@ -111,7 +111,7 @@ window.addEventListener('DOMContentLoaded', function () {
         var pdf = document.querySelectorAll('.pdf');
         var input, modal;
 
-        pdf.forEach(element => {
+        pdf.forEach(element => { // muestra de pdf 
             element.addEventListener('click', function (ev) {
                 ev.preventDefault();
 
@@ -147,7 +147,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     modal.style.left = `${posicionX}px`;
                     modal.style.top = `${posicionY}px`;
                     modal.style.display = 'block';
-                    // Borrar contenido existente antes de agregar el iframe
+
                     modal.innerHTML = '';
                     modal.appendChild(iframe);
 
@@ -161,7 +161,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         var enviar = document.getElementById('enviar')
 
-        enviar.addEventListener('click', function (ev) {
+        enviar.addEventListener('click', function (ev) { // envio de datos de solicitud
             ev.preventDefault();
             var form = document.getElementsByTagName('form')[0]
             form.valida();
@@ -188,12 +188,14 @@ window.addEventListener('DOMContentLoaded', function () {
                 var idiomaFileInput = document.getElementById('idioma');
                 var notasFileInput = document.getElementById('notas');
 
-                // Crear un objeto FormData
                 var formData = new FormData();
-                formData.append('idioma', idiomaFileInput.files[0]);
-                formData.append('notas', notasFileInput.files[0]);
+                if (idiomaFileInput!=undefined) {
+                    formData.append('idioma', idiomaFileInput.files[0]);
+                }
+                if (notasFileInput!=undefined) {
+                    formData.append('notas', notasFileInput.files[0]);
+                }
 
-                // Obtener la imagen de fondo y agregarla al FormData
                 var imageUrl = window.getComputedStyle(document.getElementById('modalFoto')).getPropertyValue('background-image').replace(/url\(['"]?(.*?)['"]?\)/, '$1');
 
                 fetch(imageUrl)
@@ -201,7 +203,6 @@ window.addEventListener('DOMContentLoaded', function () {
                     .then(blob => {
                         formData.append('fotoDNI', blob, 'fotoDNI.png');
 
-                        // Realizar la solicitud POST utilizando FormData
                         fetch("https://localhost:8000/solicitud/api/new?conId="+conId+"&canId="+canId, {
                             method: 'POST',
                             body: formData,

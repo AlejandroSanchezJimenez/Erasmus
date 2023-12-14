@@ -25,10 +25,8 @@ class RegistrationFormType extends AbstractType
             ->add('Tlf')
             ->add('Domicilio')
             ->add('Fecha_nac', DateType::class, [
-                'label' => 'Fecha de Nacimiento',
-                'attr' => [
-                    'placeholder' => 'Ingrese su fecha de nacimiento',
-                ],
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd'
             ])
             ->add('Correo')
             ->add('plainPassword', PasswordType::class, [

@@ -16,99 +16,125 @@
 
 	<div class="contenido">
 		<form class="solicitaForm">
-
-			<p class="tit solicitud" data-conId={{convocatoria.id}}>{{convocatoria.Nombre}}
-				({{convocatoria.Proyecto.Codigo}})</p>
-			<!-- Cuadrado DNI -->
-			<div class="photo-container" id='modalFoto' data-toggle="modal" data-target="#modalSeleccion"><!-- Contenido del cuadrado DNI (puedes poner una imagen o icono aquí) -->
-				{# <img src="{{ asset('assets/img/tamaño-foto-dni.jpg') }}" alt="Foto de DNI" class="photo"> #}
-			</div>
-
-			<div id="modalSeleccion">
-				<label class="customFileBtn" for="fileInput">Seleccionar foto de la galería</label>
-				<input type="file" id="fileInput" accept="image/*">
-				<div id="fileName"></div>
-				<button class="customFileBtn" id="webcamButt">Hacer foto con webcam</button>
-			</div>
-
-			<div id="contenedorWebcam">
-				<video id="player" controls autoplay></video>
-				<div id="capture-container">
-					<button id="capture"></button>
-					<button id="saveButton"></button>
-					<button id="exitButton"></button>
+			{% set condicionCumplida = false %}
+			{% set solicitado = false %}
+			{% for item in candidato.solicituds %}
+				{% if item.convocatoria.id == convocatoria.id %}
+					<div class="form-container">
+					<div class="no-result-message">
+						<p>Ya ha realizado una solicitud de este curso</p>
+					</div>
+					{% set solicitado = true %}
 				</div>
-				<canvas id="canvas" width="314px" height="236px"></canvas>
-			</div>
+				{% endif %}
+			{% endfor %}
+			
+			{% for item in convocatoria.convocatoriaDestinatarios %}
+				{% if item.Destinatario.CodGrupo == candidato.Curso and not solicitado %}
+					{% set condicionCumplida = true %}
+					<p class="tit solicitud" data-conid={{convocatoria.id}}>{{convocatoria.Nombre}}
+						({{convocatoria.Proyecto.Codigo}})</p>
+					<!-- Cuadrado DNI -->
+					<div class="photo-container" id='modalFoto' data-toggle="modal" data-target="#modalSeleccion"><!-- Contenido del cuadrado DNI (puedes poner una imagen o icono aquí) -->
+						{# <img src="{{ asset('assets/img/tamaño-foto-dni.jpg') }}" alt="Foto de DNI" class="photo"> #}
+					</div>
 
-			<div class="form-container" data-canId={{candidato.id}}>
+					<div id="modalSeleccion">
+						<label class="customFileBtn" for="fileInput">Seleccionar foto de la galería</label>
+						<input type="file" id="fileInput" accept="image/*">
+						<div id="fileName"></div>
+						<button class="customFileBtn" id="webcamButt">Hacer foto con webcam</button>
+					</div>
 
-				<div class="input-container">
-					<input type="text" id="nombre" class="input-with-label" placeholder=" " value="{{candidato.Nombre}}" data-valida="nombre">
-					<label for="nombre" class="label-inside">Nombre</label>
-				</div>
-
-				<div class="input-container">
-					<input type="text" id="dni" class="input-with-label" placeholder=" " value="{{candidato.DNI}}" data-valida="DNI">
-					<label for="dni" class="label-inside">DNI</label>
-				</div>
-
-				<div class="input-container">
-					<input type="text" id="curso" class="input-with-label" placeholder=" " value="{{candidato.Curso}}" data-valida="nombre">
-					<label for="curso" class="label-inside">Curso</label>
-				</div>
-
-				<div class="input-container">
-					<input type="text" id="telefono" class="input-with-label" placeholder=" " value="{{candidato.Tlf}}" data-valida="nombre">
-					<label for="telefono" class="label-inside">Teléfono</label>
-				</div>
-
-				<div class="input-container">
-					<input type="text" id="apellidos" class="input-with-label" placeholder=" " value="{{candidato.Apellidos}}" data-valida="nombre">
-					<label for="apellidos" class="label-inside">Apellidos</label>
-				</div>
-
-				<div class="input-container">
-					<input type="text" id="correo" class="input-with-label" placeholder=" " value="{{candidato.Correo}}" data-valida="nombre">
-					<label for="correo" class="label-inside">Correo</label>
-				</div>
-
-				<div class="input-container">
-					<input type="text" id="domicilio" class="input-with-label" placeholder=" " value="{{candidato.Domicilio}}" data-valida="nombre">
-					<label for="domicilio" class="label-inside">Domicilio</label>
-				</div>
-
-				{% for baremo in baremos %}
-					{% if baremo.Item.Nombre == 'Idioma'  %}
-						<div class="input-container" id="contenedor">
-							<input type="file" id="idioma" class="input-with-label fichero" data-valida="file">
-							<label for="idioma" class="label-inside">Idioma</label>
-							<button class="pdf" id="pdfIdioma">Ver PDF</button>
+					<div id="contenedorWebcam">
+						<video id="player" controls autoplay></video>
+						<div id="capture-container">
+							<button id="capture"></button>
+							<button id="saveButton"></button>
+							<button id="exitButton"></button>
 						</div>
-					{% endif %}
-				{% endfor %}
+						<canvas id="canvas" width="314px" height="236px"></canvas>
+					</div>
 
-				{% for baremo in baremos %}
-					{% if baremo.Item.Nombre == 'Nota'  %}
+					<div class="form-container" data-canid={{candidato.id}}>
+
 						<div class="input-container">
-							<input type="file" id="notas" class="input-with-label fichero" data-valida="file">
-							<label for="notas" class="label-inside">Notas</label>
-							<button class="pdf" id="pdfNotas">Ver PDF</button>
+							<input type="text" id="dni" class="input-with-label" placeholder=" " value="{{candidato.DNI}}" data-valida="DNI">
+							<label for="dni" class="label-inside">DNI</label>
 						</div>
-					{% endif %}
-				{% endfor %}
 
-				<div id="modalIdioma">
-					<canvas id="canvasIdi" width="500" height="320" style="border:1px solid"></canvas>
+						<div class="input-container">
+							<input type="text" id="nombre" class="input-with-label" placeholder=" " value="{{candidato.Nombre}}" data-valida="nombre">
+							<label for="nombre" class="label-inside">Nombre</label>
+						</div>
+
+						<div class="input-container">
+							<input type="text" id="apellidos" class="input-with-label" placeholder=" " value="{{candidato.Apellidos}}" data-valida="nombre">
+							<label for="apellidos" class="label-inside">Apellidos</label>
+						</div>
+
+						<div class="input-container">
+							<input type="text" id="curso" class="input-with-label" placeholder=" " value="{{candidato.Curso}}" data-valida="nombre">
+							<label for="curso" class="label-inside">Curso</label>
+						</div>
+
+						<div class="input-container">
+							<input type="text" id="telefono" class="input-with-label" placeholder=" " value="{{candidato.Tlf}}" data-valida="nombre">
+							<label for="telefono" class="label-inside">Teléfono</label>
+						</div>
+
+						<div class="input-container">
+							<input type="text" id="correo" class="input-with-label" placeholder=" " value="{{candidato.Correo}}" data-valida="nombre">
+							<label for="correo" class="label-inside">Correo</label>
+						</div>
+
+						<div class="input-container">
+							<input type="text" id="domicilio" class="input-with-label" placeholder=" " value="{{candidato.Domicilio}}" data-valida="nombre">
+							<label for="domicilio" class="label-inside">Domicilio</label>
+						</div>
+
+						{% for baremo in baremos %}
+							{% if baremo.Item.Nombre == 'Idioma'  %}
+								<div class="input-container" id="contenedor">
+									<input type="file" id="idioma" class="input-with-label fichero" data-valida="file">
+									<label for="idioma" class="label-inside">Idioma</label>
+									<button class="pdf" id="pdfIdioma">Ver PDF</button>
+								</div>
+							{% endif %}
+						{% endfor %}
+
+						{% for baremo in baremos %}
+							{% if baremo.Item.Nombre == 'Nota'  %}
+								<div class="input-container">
+									<input type="file" id="notas" class="input-with-label fichero" data-valida="file">
+									<label for="notas" class="label-inside">Notas</label>
+									<button class="pdf" id="pdfNotas">Ver PDF</button>
+								</div>
+							{% endif %}
+						{% endfor %}
+
+						<div id="modalIdioma">
+							<canvas id="canvasIdi" width="500" height="320" style="border:1px solid"></canvas>
+						</div>
+
+						<div id="modalNotas">
+							<canvas id="canvasNot" width="500" height="320" style="border:1px solid"></canvas>
+						</div>
+
+					</div>
+
+					<br><br><button class="enviar" id='enviar'>Enviar formulario</button>
+
+				{% endif %}
+			{% endfor %}
+			{% if not condicionCumplida and not solicitado %}
+				<div class="form-container">
+					<div class="no-result-message">
+						<p>No tiene acceso a este erasmus puesto que no pertenece a los cursos ofrecidos</p>
+					</div>
 				</div>
+			{% endif %}
 
-				<div id="modalNotas">
-					<canvas id="canvasNot" width="500" height="320" style="border:1px solid"></canvas>
-				</div>
-
-			</div>
-
-			<br><br><button class="enviar" id='enviar'>Enviar formulario</button>
 
 		</form>
 	</div>

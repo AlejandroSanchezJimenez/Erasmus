@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	{% block header%}
+		{{parent()}}
+	{% endblock %}
+	{% block menu %}
+		{{parent()}}
+	{% endblock %}
+	{% block separador %}
+		{{parent()}}
+	{% endblock %}
+	{% block javascripts %}
+		{{parent()}}
+	{% endblock %}
+
+	<div class="contenido">
+		<p class="tit solicitud" data-conid={{solicitud.convocatoria.id}}>Solicitud de
+			{{solicitud.convocatoria.Nombre}}
+			({{solicitud.convocatoria.Proyecto.Codigo}})</p>
+		<!-- Cuadrado DNI -->
+		<div class="photo-container" id='modalFoto' data-toggle="modal" data-target="#modalSeleccion"><!-- Contenido del cuadrado DNI (puedes poner una imagen o icono aquí) -->
+			{# <img src="{{ asset('assets/img/tamaño-foto-dni.jpg') }}" alt="Foto de DNI" class="photo"> #}
+		</div>
+
+		<div id="modalSeleccion">
+			<label class="customFileBtn" for="fileInput">Seleccionar foto de la galería</label>
+			<input type="file" id="fileInput" accept="image/*">
+			<div id="fileName"></div>
+			<button class="customFileBtn" id="webcamButt">Hacer foto con webcam</button>
+		</div>
+
+		<div id="contenedorWebcam">
+			<video id="player" controls autoplay></video>
+			<div id="capture-container">
+				<button id="capture"></button>
+				<button id="saveButton"></button>
+				<button id="exitButton"></button>
+			</div>
+			<canvas id="canvas" width="314px" height="236px"></canvas>
+		</div>
+
+		<div class="form-container" data-canid={{solicitud.id}}>
+
+			<div class="input-container">
+				<input readonly type="text" id="nombre" class="input-with-label" placeholder=" " value="{{solicitud.Nombre}}" data-valida="nombre">
+				<label for="nombre" class="label-inside">Nombre</label>
+			</div>
+
+			<div class="input-container">
+				<input readonly type="text" id="dni" class="input-with-label" placeholder=" " value="{{solicitud.DNI}}" data-valida="DNI">
+				<label for="dni" class="label-inside">DNI</label>
+			</div>
+
+			<div class="input-container">
+				<input readonly type="text" id="curso" class="input-with-label" placeholder=" " value="{{solicitud.Curso}}" data-valida="nombre">
+				<label for="curso" class="label-inside">Curso</label>
+			</div>
+
+			<div class="input-container">
+				<input readonly type="text" id="telefono" class="input-with-label" placeholder=" " value="{{solicitud.Tlf}}" data-valida="nombre">
+				<label for="telefono" class="label-inside">Teléfono</label>
+			</div>
+
+			<div class="input-container">
+				<input readonly type="text" id="apellidos" class="input-with-label" placeholder=" " value="{{solicitud.Apellidos}}" data-valida="nombre">
+				<label for="apellidos" class="label-inside">Apellidos</label>
+			</div>
+
+			<div class="input-container">
+				<input readonly type="text" id="correo" class="input-with-label" placeholder=" " value="{{solicitud.Correo}}" data-valida="nombre">
+				<label for="correo" class="label-inside">Correo</label>
+			</div>
+
+			<div class="input-container">
+				<input readonly type="text" id="domicilio" class="input-with-label" placeholder=" " value="{{solicitud.Domicilio}}" data-valida="nombre">
+				<label for="domicilio" class="label-inside">Domicilio</label>
+			</div>
+
+			<div class="input-container">
+				<input readonly type="text" id="notas" class="input-with-label" placeholder=" " value="{{solicitud.urlNotas}}" data-valida="nombre">
+				<label for="notas" class="label-inside">Notas</label>
+			</div>
+
+			<div class="input-container">
+				<input readonly type="text" id="idioma" class="input-with-label" placeholder=" " value="{{solicitud.urlIdioma}}" data-valida="nombre">
+				<label for="idioma" class="label-inside">Idioma</label>
+			</div>
+
+
+		</div>
+	</div>
+
+{% endblock %}

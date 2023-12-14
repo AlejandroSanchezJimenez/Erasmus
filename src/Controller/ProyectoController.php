@@ -24,7 +24,10 @@ class ProyectoController extends AbstractController
     #[Route('/proyectos', name: 'app_proyecto')]
     public function index(): Response
     {
-        $rol = $this->security->getUser()->getRoles();
+        $rol='';
+        if ($this->security->getUser()) {
+            $rol = $this->security->getUser()->getRoles();
+        }
         $proyectos = $this->proRep->findAll();
         return $this->render('proyecto/index.html.twig', [
             'proyectos' => $proyectos,

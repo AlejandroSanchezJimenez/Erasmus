@@ -22,6 +22,7 @@
 				<script src="{{asset('assets/js/solicitud.js')}}"></script>
 				<script src="{{asset('assets/js/recortador.js')}}"></script>
 				<script src="{{asset('assets/js/baremacion.js')}}"></script>
+				<script src="{{asset('assets/js/register.js')}}"></script>
 
 			{% endblock %}
 			{% block header %}
@@ -45,11 +46,20 @@
 			{% endblock %}
 			{% block menu %}
 				<div class="contenedor">
+					{% if app.user and 'ROLE_ADMIN' in app.user.roles %}
+						<div id="user-info" data-roles="{{ app.user.roles|json_encode|e('html_attr') }}"></div>
+					{% endif %}
+
 					<div class="menu">
 						<button class="home" id="home" title="Home"></button>
 						<button class="proyectos" id="proyectos" title="Proyectos"></button>
 						<button class="convocatorias" id="convocatorias" title="Convocatorias"></button>
-						<button class="baremar" id="baremar" title="Baremar"></button>
+						{% if app.user %}
+							<button class="solicitudes" id="solicitudes" title="Mis solicitudes"></button>
+						{% endif %}
+						{% if app.user and 'ROLE_ADMIN' in app.user.roles %}
+							<button class="baremar" id="baremar" title="Baremar"></button>
+						{% endif %}
 					</div>
 					{% block separador %}
 						<div class="barra-vertical"></div>

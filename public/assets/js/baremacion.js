@@ -1,10 +1,10 @@
 window.addEventListener('DOMContentLoaded', function () {
 
-    if (window.location.pathname === '/baremacion/convocatoria') {
+    if (window.location.pathname === '/baremacion/convocatoria') { //aseguro la ruta
         var pdfButtons = document.querySelectorAll('.pdf');
         var modal = document.getElementById('modalNotas');
 
-        pdfButtons.forEach(button => {
+        pdfButtons.forEach(button => { // por cada uno de los botones de ver pdf añadimos un listener que muestra el pdf con los datos guardados
             button.addEventListener('click', function (event) {
                 event.preventDefault();
 
@@ -12,35 +12,27 @@ window.addEventListener('DOMContentLoaded', function () {
                     modal.style.display = 'none';
                 }
 
-                // Determinar qué modal se debe usar
-                // if (button.id === 'pdfNotas') {
-                //     modal = document.getElementById('modalNotas');
-                // } else {
-                //     modal = document.getElementById('modalIdioma');
-                // }
-
                 modal = document.getElementById('modalNotas');
 
-                // Crear iframe para mostrar el PDF
                 var iframe = document.createElement('iframe');
                 iframe.type = 'application/pdf';
                 iframe.src = '../pdf/' + button.getAttribute('data-url');
-                iframe.style.width = '500px';
+                iframe.style.width = '450px';
                 iframe.style.height = '300px';
 
                 const posicionX = button.getBoundingClientRect().x + button.getBoundingClientRect().width;
                 const posicionY = button.getBoundingClientRect().y - 305;
 
-                modal.style.right = `${posicionX}px`;
+                modal.style.left = `${posicionX}px`;
                 modal.style.top = `${posicionY}px`;
                 modal.style.display = 'block';
-                // Limpiar contenido existente antes de agregar el iframe
+
                 modal.innerHTML = '';
                 modal.appendChild(iframe);
             });
         });
 
-        document.addEventListener('click', function (event) {
+        document.addEventListener('click', function (event) { // salir del modal clicando fuera
             if (modal.style.display === 'block' && !modal.contains(event.target) && !event.target.classList.contains('pdf')) {
                 modal.style.display = 'none';
             }
@@ -48,7 +40,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         const inputs = document.querySelectorAll('#baremacion input');
 
-        inputs.forEach(element => {
+        inputs.forEach(element => { // por cada uno de los inputs al modificarlo guardo la baremacion de ese item y muestro un div de carga
             element.addEventListener('input', function (ev) {
                 var fila = this.closest('tr');
                 const queryString = window.location.search;
@@ -71,7 +63,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     fila.querySelector('.cargando').classList.remove('rotate-center')
                 }, 2000);
 
-                fetch("https://localhost:8000/baremacion/api/new", { // envío el post
+                fetch("https://localhost:8000/baremacion/api/new", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -86,35 +78,7 @@ window.addEventListener('DOMContentLoaded', function () {
             })
         });
 
-        function sortTable(columnIndex) {
-            var table, rows, switching, i, x, y, shouldSwitch;
-            table = document.getElementById("myTable");
-            switching = true;
-
-            while (switching) {
-                switching = false;
-                rows = table.rows;
-
-                for (i = 1; i < (rows.length - 1); i++) {
-                    shouldSwitch = false;
-
-                    x = rows[i].getElementsByTagName("td")[columnIndex];
-                    y = rows[i + 1].getElementsByTagName("td")[columnIndex];
-
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-
-                if (shouldSwitch) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-                }
-            }
-        }
-
-        fetch("https://localhost:8000/baremacion/api")
+        fetch("https://localhost:8000/baremacion/api") // relleno con los datos de baremacion en caso de que haya
             .then(x => x.json())
             .then(y => {
                 var tabla = document.getElementById("baremacion");
@@ -137,7 +101,33 @@ window.addEventListener('DOMContentLoaded', function () {
                 console.error('Error fetching data:', error);
             });
 
+        function search() { // buscador para facilitar la baremacion
+            var num_cols, display, input, filter, table_body, tr, td, i, txtValue; 
+            num_cols = 3;
+            input = document.getElementById("searcher");
+            filter = input.value.toUpperCase();
+            table_body = document.getElementById("baremacion");
+            tbody = table_body.querySelector('tbody');
+            tr = tbody.getElementsByTagName("tr");
 
+            for (i = 0; i < tr.length; i++) {
+                display = "none";
+                for (j = 0; j < num_cols; j++) {
+                    td = tr[i].getElementsByTagName("td")[j];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            display = "";
+                        }
+                    }
+                }
+                tr[i].style.display = display;
+            }
+        }
+
+        this.document.getElementById('searcher').addEventListener('input', function() { // llamada al buscador
+            search()
+        })
     }
 
 })
